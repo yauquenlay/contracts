@@ -1,0 +1,724 @@
+{
+	"compiler": {
+		"version": "0.5.15+commit.6a57276f"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "_owner",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "_operator",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "bool",
+						"name": "_approved",
+						"type": "bool"
+					}
+				],
+				"name": "ApprovalForAll",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "_operator",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "_from",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "_to",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256[]",
+						"name": "_ids",
+						"type": "uint256[]"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256[]",
+						"name": "_amounts",
+						"type": "uint256[]"
+					}
+				],
+				"name": "TransferBatch",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "_operator",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "_from",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "_to",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "_id",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "_amount",
+						"type": "uint256"
+					}
+				],
+				"name": "TransferSingle",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "string",
+						"name": "_uri",
+						"type": "string"
+					},
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "_id",
+						"type": "uint256"
+					}
+				],
+				"name": "URI",
+				"type": "event"
+			},
+			{
+				"constant": true,
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_owner",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_id",
+						"type": "uint256"
+					}
+				],
+				"name": "balanceOf",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"constant": true,
+				"inputs": [
+					{
+						"internalType": "address[]",
+						"name": "_owners",
+						"type": "address[]"
+					},
+					{
+						"internalType": "uint256[]",
+						"name": "_ids",
+						"type": "uint256[]"
+					}
+				],
+				"name": "balanceOfBatch",
+				"outputs": [
+					{
+						"internalType": "uint256[]",
+						"name": "",
+						"type": "uint256[]"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"constant": true,
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_signer",
+						"type": "address"
+					}
+				],
+				"name": "getNonce",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "nonce",
+						"type": "uint256"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"constant": true,
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_owner",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "_operator",
+						"type": "address"
+					}
+				],
+				"name": "isApprovedForAll",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "isOperator",
+						"type": "bool"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"constant": true,
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_signerAddress",
+						"type": "address"
+					},
+					{
+						"internalType": "bytes32",
+						"name": "_hash",
+						"type": "bytes32"
+					},
+					{
+						"internalType": "bytes",
+						"name": "_data",
+						"type": "bytes"
+					},
+					{
+						"internalType": "bytes",
+						"name": "_sig",
+						"type": "bytes"
+					}
+				],
+				"name": "isValidSignature",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "isValid",
+						"type": "bool"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"constant": false,
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_from",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "_to",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256[]",
+						"name": "_ids",
+						"type": "uint256[]"
+					},
+					{
+						"internalType": "uint256[]",
+						"name": "_amounts",
+						"type": "uint256[]"
+					},
+					{
+						"internalType": "bool",
+						"name": "_isGasFee",
+						"type": "bool"
+					},
+					{
+						"internalType": "bytes",
+						"name": "_data",
+						"type": "bytes"
+					}
+				],
+				"name": "metaSafeBatchTransferFrom",
+				"outputs": [],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"constant": false,
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_from",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "_to",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_id",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_amount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bool",
+						"name": "_isGasFee",
+						"type": "bool"
+					},
+					{
+						"internalType": "bytes",
+						"name": "_data",
+						"type": "bytes"
+					}
+				],
+				"name": "metaSafeTransferFrom",
+				"outputs": [],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"constant": false,
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_owner",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "_operator",
+						"type": "address"
+					},
+					{
+						"internalType": "bool",
+						"name": "_approved",
+						"type": "bool"
+					},
+					{
+						"internalType": "bool",
+						"name": "_isGasFee",
+						"type": "bool"
+					},
+					{
+						"internalType": "bytes",
+						"name": "_data",
+						"type": "bytes"
+					}
+				],
+				"name": "metaSetApprovalForAll",
+				"outputs": [],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"constant": false,
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_from",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "_to",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256[]",
+						"name": "_ids",
+						"type": "uint256[]"
+					},
+					{
+						"internalType": "uint256[]",
+						"name": "_amounts",
+						"type": "uint256[]"
+					},
+					{
+						"internalType": "bytes",
+						"name": "_data",
+						"type": "bytes"
+					}
+				],
+				"name": "safeBatchTransferFrom",
+				"outputs": [],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"constant": false,
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_from",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "_to",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_id",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_amount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bytes",
+						"name": "_data",
+						"type": "bytes"
+					}
+				],
+				"name": "safeTransferFrom",
+				"outputs": [],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"constant": false,
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_operator",
+						"type": "address"
+					},
+					{
+						"internalType": "bool",
+						"name": "_approved",
+						"type": "bool"
+					}
+				],
+				"name": "setApprovalForAll",
+				"outputs": [],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"constant": true,
+				"inputs": [
+					{
+						"internalType": "bytes4",
+						"name": "_interfaceID",
+						"type": "bytes4"
+					}
+				],
+				"name": "supportsInterface",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"details": "ERC-1155 with native metatransaction methods. These additional functions allow users     to presign function calls and allow third parties to execute these on their behalf  * TO DO: - encodePacked vs encode gas - Gas Receipt and transferData as EIP-712 struct",
+			"methods": {
+				"balanceOf(address,uint256)": {
+					"params": {
+						"_id": "ID of the Token",
+						"_owner": "The address of the token holder"
+					},
+					"return": "The _owner's balance of the Token type requested"
+				},
+				"balanceOfBatch(address[],uint256[])": {
+					"params": {
+						"_ids": "ID of the Tokens",
+						"_owners": "The addresses of the token holders"
+					},
+					"return": "The _owner's balance of the Token types requested (i.e. balance for each (owner, id) pair)"
+				},
+				"getNonce(address)": {
+					"params": {
+						"_signer": "Address to query signature nonce for"
+					}
+				},
+				"isApprovedForAll(address,address)": {
+					"params": {
+						"_operator": "Address of authorized operator",
+						"_owner": "The owner of the Tokens"
+					},
+					"return": "True if the operator is approved, false if not"
+				},
+				"isValidSignature(address,bytes32,bytes,bytes)": {
+					"details": "Verifies that a hash has been signed by the given signer.",
+					"params": {
+						"_data": "Full EIP-712 data structure that was hashed and signed",
+						"_hash": "Hash of the EIP-712 encoded data",
+						"_sig": "Proof that the hash has been signed by signer.",
+						"_signerAddress": "Address that should have signed the given hash."
+					},
+					"return": "True if the address recovered from the provided signature matches the input signer address."
+				},
+				"metaSafeBatchTransferFrom(address,address,uint256[],uint256[],bool,bytes)": {
+					"params": {
+						"_amounts": "Transfer amounts per token type",
+						"_data": "Encodes a meta transfer indicator, signature, gas payment receipt and extra transfer data  _data should be encoded as ((bytes32 r, bytes32 s, uint8 v, SignatureType sigType), (GasReceipt g, bytes data))  i.e. high level encoding should be (bytes, bytes), where the latter bytes array is a nested bytes array",
+						"_from": "Source addresses",
+						"_ids": "IDs of each token type",
+						"_to": "Target addresses"
+					}
+				},
+				"metaSafeTransferFrom(address,address,uint256,uint256,bool,bytes)": {
+					"params": {
+						"_amount": "Transfered amount",
+						"_data": "Encodes a meta transfer indicator, signature, gas payment receipt and extra transfer data  _data should be encoded as ((bytes32 r, bytes32 s, uint8 v, SignatureType sigType), (GasReceipt g, bytes data))  i.e. high level encoding should be (bytes, bytes), where the latter bytes array is a nested bytes array",
+						"_from": "Source address",
+						"_id": "ID of the token type",
+						"_isGasFee": "Whether gas is reimbursed to executor or not",
+						"_to": "Target address"
+					}
+				},
+				"metaSetApprovalForAll(address,address,bool,bool,bytes)": {
+					"params": {
+						"_approved": "True if the operator is approved, false to revoke approval",
+						"_data": "Encodes signature and gas payment receipt  _data should be encoded as ((bytes32 r, bytes32 s, uint8 v, SignatureType sigType), (GasReceipt g))  i.e. high level encoding should be (bytes, bytes), where the latter bytes array is a nested bytes array",
+						"_isGasFee": "Whether gas will be reimbursed or not, with vlid signature",
+						"_operator": "Address to add to the set of authorized operators",
+						"_owner": "Address that wants to set operator status  _spender"
+					}
+				},
+				"safeBatchTransferFrom(address,address,uint256[],uint256[],bytes)": {
+					"params": {
+						"_amounts": "Transfer amounts per token type",
+						"_data": "Additional data with no specified format, sent in call to `_to`",
+						"_from": "Source addresses",
+						"_ids": "IDs of each token type",
+						"_to": "Target addresses"
+					}
+				},
+				"safeTransferFrom(address,address,uint256,uint256,bytes)": {
+					"params": {
+						"_amount": "Transfered amount",
+						"_data": "Additional data with no specified format, sent in call to `_to`",
+						"_from": "Source address",
+						"_id": "ID of the token type",
+						"_to": "Target address"
+					}
+				},
+				"setApprovalForAll(address,bool)": {
+					"params": {
+						"_approved": "True if the operator is approved, false to revoke approval",
+						"_operator": "Address to add to the set of authorized operators"
+					}
+				},
+				"supportsInterface(bytes4)": {
+					"params": {
+						"_interfaceID": "The interface identifier, as specified in ERC-165"
+					},
+					"return": "`true` if the contract implements `_interfaceID` and"
+				}
+			}
+		},
+		"userdoc": {
+			"methods": {
+				"balanceOf(address,uint256)": {
+					"notice": "Get the balance of an account's Tokens"
+				},
+				"balanceOfBatch(address[],uint256[])": {
+					"notice": "Get the balance of multiple account/token pairs"
+				},
+				"getNonce(address)": {
+					"notice": "Returns the current nonce associated with a given address"
+				},
+				"isApprovedForAll(address,address)": {
+					"notice": "Queries the approval status of an operator for a given owner"
+				},
+				"metaSafeBatchTransferFrom(address,address,uint256[],uint256[],bool,bytes)": {
+					"notice": "Allows anyone with a valid signature to transfer multiple types of tokens on the bahalf of _from"
+				},
+				"metaSafeTransferFrom(address,address,uint256,uint256,bool,bytes)": {
+					"notice": "Allows anyone with a valid signature to transfer _amount amount of a token _id on the bahalf of _from"
+				},
+				"metaSetApprovalForAll(address,address,bool,bool,bytes)": {
+					"notice": "Approve the passed address to spend on behalf of _from if valid signature is provided"
+				},
+				"safeBatchTransferFrom(address,address,uint256[],uint256[],bytes)": {
+					"notice": "Send multiple types of Tokens from the _from address to the _to address (with safety call)"
+				},
+				"safeTransferFrom(address,address,uint256,uint256,bytes)": {
+					"notice": "Transfers amount amount of an _id from the _from address to the _to address specified"
+				},
+				"setApprovalForAll(address,bool)": {
+					"notice": "Enable or disable approval for a third party (\"operator\") to manage all of caller's tokens"
+				},
+				"supportsInterface(bytes4)": {
+					"notice": "Query if a contract implements an interface"
+				}
+			}
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"localhost/dig/multi-token-standard/contracts/tokens/ERC1155/ERC1155Meta.sol": "ERC1155Meta"
+		},
+		"evmVersion": "istanbul",
+		"libraries": {},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"localhost/dig/multi-token-standard/contracts/interfaces/IERC1155.sol": {
+			"keccak256": "0x5a67ee8613982aa92164e18e27c6e88556a888c0504487a8396b73b3653507d3",
+			"urls": [
+				"bzz-raw://522780eed597e3c6d362abf92efe19ead75a509c3c50d43737655c3456643bf5",
+				"dweb:/ipfs/QmTfs2cz1MNY8rs8iFh6vokKDkxZq7Z9XGmEBxYaPbiLHE"
+			]
+		},
+		"localhost/dig/multi-token-standard/contracts/interfaces/IERC1155TokenReceiver.sol": {
+			"keccak256": "0x0627f5ccd8caa8a311b3b569153f61c80278d6ead10537825fe30688e421840b",
+			"urls": [
+				"bzz-raw://89eb4896014239f4f74cfeaa02769bfd78c55e42fa8756619f1067411fed84d8",
+				"dweb:/ipfs/QmZLN6WwHXBwFQBs1te2G4Ldjy1BGyb683bwbEE6a9Gs8c"
+			]
+		},
+		"localhost/dig/multi-token-standard/contracts/interfaces/IERC1271Wallet.sol": {
+			"keccak256": "0xced9a0885f8426e80caebadfb7ab33e7b2917b73b12e38455a2f73437225a62d",
+			"urls": [
+				"bzz-raw://27b0f29454861cef7af126d1fc4823eaf54e7a4e3ef1ba91462e69edf9299936",
+				"dweb:/ipfs/Qmf5shi8Qo8qmaNw7uv2dudF6E7ayM5TrUs42dAzqQVuU2"
+			]
+		},
+		"localhost/dig/multi-token-standard/contracts/interfaces/IERC165.sol": {
+			"keccak256": "0x9ecfc2474ba41a4968d3025069d1b0edfcbb3aafb308c7365afa3dee98358b2b",
+			"urls": [
+				"bzz-raw://83d80246974f7752472e7d5401c10f944d3a158d521cb883b45cf5c6fe3f2f5c",
+				"dweb:/ipfs/QmZ3RD8sPzZXFSB2wyQd94wS9RRZUC5D68r3CNmTvvzMjQ"
+			]
+		},
+		"localhost/dig/multi-token-standard/contracts/interfaces/IERC20.sol": {
+			"keccak256": "0xa670e3f479bb20b65632b4a8b52a8d077d3d7d26efb4c05e8b22bb9c484dbd37",
+			"urls": [
+				"bzz-raw://930e51291313c015e34607b671d61e7ee971b808d8d2e572cde003f356f9e5d3",
+				"dweb:/ipfs/QmYaL6AdZURmWRwiUdTFH5vvrHwBjVHCPvhZzeKwKTVP7f"
+			]
+		},
+		"localhost/dig/multi-token-standard/contracts/tokens/ERC1155/ERC1155.sol": {
+			"keccak256": "0x7dc5b95f59d3c564e612623cd8575fbd22fed3d4021ec57f4fb55c2bbdb3f964",
+			"urls": [
+				"bzz-raw://f5632fc5bf9bcac16e2e9e715ae8540d35783cb896177f3551f766bec382516d",
+				"dweb:/ipfs/QmQvtAYiqXN4jLZBj8xsLhRHBghKRXWfin8a4LYogWkFFL"
+			]
+		},
+		"localhost/dig/multi-token-standard/contracts/tokens/ERC1155/ERC1155Meta.sol": {
+			"keccak256": "0xe2123ef4c153589623a614d5f24ed66e88ad6f75871df323ba677c79dc8dc5e6",
+			"urls": [
+				"bzz-raw://71158a6ee23aeb85c19508cbefe880766b86fd20eeef039d451a8198296242ee",
+				"dweb:/ipfs/QmQBqdMSoWHbDXtjGV75vy4mjBerfyTvAVy25Zqj1hdG5v"
+			]
+		},
+		"localhost/dig/multi-token-standard/contracts/utils/Address.sol": {
+			"keccak256": "0x77fd80b65f5a1c5dbc325b9a9396082cdd455da05702cd9905e9a3fc2619ebc5",
+			"urls": [
+				"bzz-raw://c5e40da586ebe49ad301b5f23f065427dc3c0804104b06985bf9be389fc410f3",
+				"dweb:/ipfs/QmaUdAWBPKnW3rNPMMrKUvZCrL1opwJDeG5tUPyS25dGeh"
+			]
+		},
+		"localhost/dig/multi-token-standard/contracts/utils/LibBytes.sol": {
+			"keccak256": "0xd437ecfd9f9fb2486fc6536964e1fb75539051590827b6d03083b9204b380da6",
+			"urls": [
+				"bzz-raw://cdd3a5cefcb44c4f35c9b9bd62e301b33af6cc2994f3dde6bac9a42b45216474",
+				"dweb:/ipfs/QmVHi4MvvLUfGwDQgUffRTs7L3wxtv8b8jS3qe22z3P9rw"
+			]
+		},
+		"localhost/dig/multi-token-standard/contracts/utils/LibEIP712.sol": {
+			"keccak256": "0xca80d7a7717fd3c6516a61e0cd037542a2ea8ac0f58738b7648de71f216f5367",
+			"urls": [
+				"bzz-raw://9de73131c443e782133eae93a8631fa897c772942122bfff760e30635fed7772",
+				"dweb:/ipfs/QmUDmLXsVixpUxxDJSNo8asmH99StmUniQRxkprhDb8agL"
+			]
+		},
+		"localhost/dig/multi-token-standard/contracts/utils/SafeMath.sol": {
+			"keccak256": "0xef960d322d39c2acc549c05fa6e97a9f755a18d47a00b7b77c2db20da11df45e",
+			"urls": [
+				"bzz-raw://1640a9cb1210d9bbc464a907f8710b15d6648a5a4df5a0b7039e78ee8188aa25",
+				"dweb:/ipfs/QmPdCP9ufahe9CeJQW5AxFoeNJa6d9Sut9zWpxV6wrEhJJ"
+			]
+		},
+		"localhost/dig/multi-token-standard/contracts/utils/SignatureValidator.sol": {
+			"keccak256": "0x82a016669d16716990b9169b16ffd8499e4fb4e7990305b39c340b06a3858a86",
+			"urls": [
+				"bzz-raw://12c6f0b1c66bb50600653647808c7c31d1504284919267fa5fdcc006701cd104",
+				"dweb:/ipfs/QmYHBYVHutAc89RNfWVTMXV2VcEJzGq8Coi5hCy9N1qknH"
+			]
+		}
+	},
+	"version": 1
+}

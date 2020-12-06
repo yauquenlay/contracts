@@ -1,0 +1,44 @@
+{
+	"compiler": {
+		"version": "0.5.17+commit.d19bba13"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			}
+		],
+		"devdoc": {
+			"methods": {}
+		},
+		"userdoc": {
+			"methods": {}
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"localhost/Tron2.sol": "Context"
+		},
+		"evmVersion": "istanbul",
+		"libraries": {},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"localhost/Tron2.sol": {
+			"keccak256": "0xdd294ddc8ea8642950d40a21ce0d9aca08cc212c059cf8ff16311246864f631a",
+			"urls": [
+				"bzz-raw://558edbd6422dc9b4252d24d0895b2843a092e2d9ebc1e0454967fccf92fb030e",
+				"dweb:/ipfs/QmY513K3dfF76zeXX9DabvRMEEDWmbRFPCJ9o46878pQSf"
+			]
+		}
+	},
+	"version": 1
+}

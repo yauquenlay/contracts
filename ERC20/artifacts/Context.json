@@ -1,0 +1,59 @@
+{
+	"deploy": {
+		"VM:-": {
+			"linkReferences": {},
+			"autoDeployLib": true
+		},
+		"main:1": {
+			"linkReferences": {},
+			"autoDeployLib": true
+		},
+		"ropsten:3": {
+			"linkReferences": {},
+			"autoDeployLib": true
+		},
+		"rinkeby:4": {
+			"linkReferences": {},
+			"autoDeployLib": true
+		},
+		"kovan:42": {
+			"linkReferences": {},
+			"autoDeployLib": true
+		},
+		"görli:5": {
+			"linkReferences": {},
+			"autoDeployLib": true
+		},
+		"Custom": {
+			"linkReferences": {},
+			"autoDeployLib": true
+		}
+	},
+	"data": {
+		"bytecode": {
+			"linkReferences": {},
+			"object": "6080604052348015600f57600080fd5b50603e80601d6000396000f3fe6080604052600080fdfea265627a7a7231582059296bb38a2b4877239152a62fd8f1c3b720963f205daf9553a3d7f6a65a604964736f6c634300050f0032",
+			"opcodes": "PUSH1 0x80 PUSH1 0x40 MSTORE CALLVALUE DUP1 ISZERO PUSH1 0xF JUMPI PUSH1 0x0 DUP1 REVERT JUMPDEST POP PUSH1 0x3E DUP1 PUSH1 0x1D PUSH1 0x0 CODECOPY PUSH1 0x0 RETURN INVALID PUSH1 0x80 PUSH1 0x40 MSTORE PUSH1 0x0 DUP1 REVERT INVALID LOG2 PUSH6 0x627A7A723158 KECCAK256 MSIZE 0x29 PUSH12 0xB38A2B4877239152A62FD8F1 0xC3 0xB7 KECCAK256 SWAP7 EXTCODEHASH KECCAK256 0x5D 0xAF SWAP6 MSTORE8 LOG3 0xD7 0xF6 0xA6 GAS PUSH1 0x49 PUSH5 0x736F6C6343 STOP SDIV 0xF STOP ORIGIN ",
+			"sourceMap": "558:349:0:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;558:349:0;;;;;;;"
+		},
+		"deployedBytecode": {
+			"linkReferences": {},
+			"object": "6080604052600080fdfea265627a7a7231582059296bb38a2b4877239152a62fd8f1c3b720963f205daf9553a3d7f6a65a604964736f6c634300050f0032",
+			"opcodes": "PUSH1 0x80 PUSH1 0x40 MSTORE PUSH1 0x0 DUP1 REVERT INVALID LOG2 PUSH6 0x627A7A723158 KECCAK256 MSIZE 0x29 PUSH12 0xB38A2B4877239152A62FD8F1 0xC3 0xB7 KECCAK256 SWAP7 EXTCODEHASH KECCAK256 0x5D 0xAF SWAP6 MSTORE8 LOG3 0xD7 0xF6 0xA6 GAS PUSH1 0x49 PUSH5 0x736F6C6343 STOP SDIV 0xF STOP ORIGIN ",
+			"sourceMap": "558:349:0:-;;;;;"
+		},
+		"gasEstimates": {
+			"creation": {
+				"codeDepositCost": "12400",
+				"executionCost": "66",
+				"totalCost": "12466"
+			},
+			"internal": {
+				"_msgData()": "infinite",
+				"_msgSender()": "infinite"
+			}
+		},
+		"methodIdentifiers": {}
+	},
+	"abi": []
+}
