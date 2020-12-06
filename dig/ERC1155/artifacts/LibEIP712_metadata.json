@@ -1,0 +1,44 @@
+{
+	"compiler": {
+		"version": "0.5.17+commit.d19bba13"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			}
+		],
+		"devdoc": {
+			"methods": {}
+		},
+		"userdoc": {
+			"methods": {}
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"localhost/dig/ERC1155/LibEIP712.sol": "LibEIP712"
+		},
+		"evmVersion": "istanbul",
+		"libraries": {},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"localhost/dig/ERC1155/LibEIP712.sol": {
+			"keccak256": "0xca80d7a7717fd3c6516a61e0cd037542a2ea8ac0f58738b7648de71f216f5367",
+			"urls": [
+				"bzz-raw://9de73131c443e782133eae93a8631fa897c772942122bfff760e30635fed7772",
+				"dweb:/ipfs/QmUDmLXsVixpUxxDJSNo8asmH99StmUniQRxkprhDb8agL"
+			]
+		}
+	},
+	"version": 1
+}

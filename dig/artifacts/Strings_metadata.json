@@ -26,10 +26,10 @@
 	},
 	"sources": {
 		"localhost/dig/Strings.sol": {
-			"keccak256": "0x0232503931a9e1e0e067087cc8f4ffbb46de7bae0c222bbf1b453c4e54ff606c",
+			"keccak256": "0x186bf3cf5971e3814ac28ed5049a8f6ab66579c33a178616f66a663231075270",
 			"urls": [
-				"bzz-raw://1541d513c06f30ad1a9ff9a66a5d63f6cd93cef7be7a2d3ca7d38d5dbaeb1159",
-				"dweb:/ipfs/QmW68UTJ7fdskDYQZxyNup9JcCqWa745WwxUc1UZMtGEhx"
+				"bzz-raw://7122aaa023e2097f2be4864c5380f3c5846255ef400ea85693ab5a49dbafc98c",
+				"dweb:/ipfs/QmcvQqorChGsNzaQYSiH5MmTGm78tziABkBs9WrSuHgSX3"
 			]
 		}
 	},

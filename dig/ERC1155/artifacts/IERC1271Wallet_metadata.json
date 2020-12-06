@@ -1,0 +1,114 @@
+{
+	"compiler": {
+		"version": "0.5.17+commit.d19bba13"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"constant": true,
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "_hash",
+						"type": "bytes32"
+					},
+					{
+						"internalType": "bytes",
+						"name": "_signature",
+						"type": "bytes"
+					}
+				],
+				"name": "isValidSignature",
+				"outputs": [
+					{
+						"internalType": "bytes4",
+						"name": "magicValue",
+						"type": "bytes4"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"constant": true,
+				"inputs": [
+					{
+						"internalType": "bytes",
+						"name": "_data",
+						"type": "bytes"
+					},
+					{
+						"internalType": "bytes",
+						"name": "_signature",
+						"type": "bytes"
+					}
+				],
+				"name": "isValidSignature",
+				"outputs": [
+					{
+						"internalType": "bytes4",
+						"name": "magicValue",
+						"type": "bytes4"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"methods": {
+				"isValidSignature(bytes,bytes)": {
+					"details": "MUST return the correct magic value if the signature provided is valid for the provided data  > The bytes4 magic value to return when signature is valid is 0x20c13b0b : bytes4(keccak256(\"isValidSignature(bytes,bytes)\")  > This function MAY modify Ethereum's state",
+					"params": {
+						"_data": "Arbitrary length data signed on the behalf of address(this)",
+						"_signature": "Signature byte array associated with _data"
+					},
+					"return": "Magic value 0x20c13b0b if the signature is valid and 0x0 otherwise    "
+				},
+				"isValidSignature(bytes32,bytes)": {
+					"details": "MUST return the correct magic value if the signature provided is valid for the provided hash  > The bytes4 magic value to return when signature is valid is 0x20c13b0b : bytes4(keccak256(\"isValidSignature(bytes,bytes)\")  > This function MAY modify Ethereum's state",
+					"params": {
+						"_hash": "keccak256 hash that was signed",
+						"_signature": "Signature byte array associated with _data"
+					},
+					"return": "Magic value 0x20c13b0b if the signature is valid and 0x0 otherwise"
+				}
+			}
+		},
+		"userdoc": {
+			"methods": {
+				"isValidSignature(bytes,bytes)": {
+					"notice": "Verifies whether the provided signature is valid with respect to the provided data"
+				},
+				"isValidSignature(bytes32,bytes)": {
+					"notice": "Verifies whether the provided signature is valid with respect to the provided hash"
+				}
+			}
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"localhost/dig/ERC1155/IERC1271Wallet.sol": "IERC1271Wallet"
+		},
+		"evmVersion": "istanbul",
+		"libraries": {},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"localhost/dig/ERC1155/IERC1271Wallet.sol": {
+			"keccak256": "0xced9a0885f8426e80caebadfb7ab33e7b2917b73b12e38455a2f73437225a62d",
+			"urls": [
+				"bzz-raw://27b0f29454861cef7af126d1fc4823eaf54e7a4e3ef1ba91462e69edf9299936",
+				"dweb:/ipfs/Qmf5shi8Qo8qmaNw7uv2dudF6E7ayM5TrUs42dAzqQVuU2"
+			]
+		}
+	},
+	"version": 1
+}

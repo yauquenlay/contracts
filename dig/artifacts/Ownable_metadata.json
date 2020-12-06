@@ -1,6 +1,6 @@
 {
 	"compiler": {
-		"version": "0.5.17+commit.d19bba13"
+		"version": "0.5.15+commit.6a57276f"
 	},
 	"language": "Solidity",
 	"output": {
@@ -106,10 +106,17 @@
 	},
 	"sources": {
 		"localhost/dig/Ownable.sol": {
-			"keccak256": "0x5a3d8d092582b9db099cfbeeb0bc627046e19bba82e03b3c20cbb5ab84f14633",
+			"keccak256": "0x36a5c49d4c6af221f303eb4ce63e47b35a79a2027a2e5aa2a666d2f334c12770",
 			"urls": [
-				"bzz-raw://9f441db85d232bf4ed7a735e1b5b5a4ee8cb27d2127e1630e169574dfddd6b7f",
-				"dweb:/ipfs/QmSuqStut1ZRbV4CrjySiuSy8H1wh64kUdrmBekK1uiHEH"
+				"bzz-raw://1e73387d8c5aa54ec66d69fdc1b67ec83e471ef5240074d717ee33ec5bb1de20",
+				"dweb:/ipfs/QmQy9Xereah4Q4KBEzNXodQJfmUYoAy9pV2WzzUYveg6DN"
+			]
+		},
+		"localhost/dig/SafeMath.sol": {
+			"keccak256": "0xd9d4b7c9aaff75b838816b3507614e037f890a6c927798f19aad99a9c07d4e9d",
+			"urls": [
+				"bzz-raw://8ae33ec15991f24d831569ce06d76545ca58351791dab9e4174d93c9324e1bcc",
+				"dweb:/ipfs/QmVhfc17zRrYPD8D4W5dAePAZ3KXiHPvW6pUiBMFywsuCr"
 			]
 		}
 	},

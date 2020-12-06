@@ -1,0 +1,107 @@
+{
+	"compiler": {
+		"version": "0.5.17+commit.d19bba13"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"constant": true,
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_signerAddress",
+						"type": "address"
+					},
+					{
+						"internalType": "bytes32",
+						"name": "_hash",
+						"type": "bytes32"
+					},
+					{
+						"internalType": "bytes",
+						"name": "_data",
+						"type": "bytes"
+					},
+					{
+						"internalType": "bytes",
+						"name": "_sig",
+						"type": "bytes"
+					}
+				],
+				"name": "isValidSignature",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "isValid",
+						"type": "bool"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"details": "Contains logic for signature validation. Signatures from wallet contracts assume ERC-1271 support (https://github.com/ethereum/EIPs/blob/master/EIPS/eip-1271.md) Notes: Methods are strongly inspired by contracts in https://github.com/0xProject/0x-monorepo/blob/development/",
+			"methods": {
+				"isValidSignature(address,bytes32,bytes,bytes)": {
+					"details": "Verifies that a hash has been signed by the given signer.",
+					"params": {
+						"_data": "Full EIP-712 data structure that was hashed and signed",
+						"_hash": "Hash of the EIP-712 encoded data",
+						"_sig": "Proof that the hash has been signed by signer.",
+						"_signerAddress": "Address that should have signed the given hash."
+					},
+					"return": "True if the address recovered from the provided signature matches the input signer address."
+				}
+			}
+		},
+		"userdoc": {
+			"methods": {}
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"localhost/dig/ERC1155/SignatureValidator.sol": "SignatureValidator"
+		},
+		"evmVersion": "istanbul",
+		"libraries": {},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"localhost/dig/ERC1155/IERC1271Wallet.sol": {
+			"keccak256": "0xced9a0885f8426e80caebadfb7ab33e7b2917b73b12e38455a2f73437225a62d",
+			"urls": [
+				"bzz-raw://27b0f29454861cef7af126d1fc4823eaf54e7a4e3ef1ba91462e69edf9299936",
+				"dweb:/ipfs/Qmf5shi8Qo8qmaNw7uv2dudF6E7ayM5TrUs42dAzqQVuU2"
+			]
+		},
+		"localhost/dig/ERC1155/LibBytes.sol": {
+			"keccak256": "0xd437ecfd9f9fb2486fc6536964e1fb75539051590827b6d03083b9204b380da6",
+			"urls": [
+				"bzz-raw://cdd3a5cefcb44c4f35c9b9bd62e301b33af6cc2994f3dde6bac9a42b45216474",
+				"dweb:/ipfs/QmVHi4MvvLUfGwDQgUffRTs7L3wxtv8b8jS3qe22z3P9rw"
+			]
+		},
+		"localhost/dig/ERC1155/LibEIP712.sol": {
+			"keccak256": "0xca80d7a7717fd3c6516a61e0cd037542a2ea8ac0f58738b7648de71f216f5367",
+			"urls": [
+				"bzz-raw://9de73131c443e782133eae93a8631fa897c772942122bfff760e30635fed7772",
+				"dweb:/ipfs/QmUDmLXsVixpUxxDJSNo8asmH99StmUniQRxkprhDb8agL"
+			]
+		},
+		"localhost/dig/ERC1155/SignatureValidator.sol": {
+			"keccak256": "0xeb285fd6fda5b6a2c6aefe019c76c7d615373ba1c352a70467dd68040f58d441",
+			"urls": [
+				"bzz-raw://3e0f250576f1b01c95ba308ef1ea472a277d01006d39fe5c113d29491b34d370",
+				"dweb:/ipfs/QmbBpUZgm6XVtvpNoTxf6ARHJuT9bPNeYWnU2i48wz8Nsp"
+			]
+		}
+	},
+	"version": 1
+}

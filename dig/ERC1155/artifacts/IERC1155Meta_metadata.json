@@ -1,0 +1,192 @@
+{
+	"compiler": {
+		"version": "0.5.17+commit.d19bba13"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"constant": false,
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_from",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "_to",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256[]",
+						"name": "_ids",
+						"type": "uint256[]"
+					},
+					{
+						"internalType": "uint256[]",
+						"name": "_amounts",
+						"type": "uint256[]"
+					},
+					{
+						"internalType": "bool",
+						"name": "_isGasFee",
+						"type": "bool"
+					},
+					{
+						"internalType": "bytes",
+						"name": "_data",
+						"type": "bytes"
+					}
+				],
+				"name": "metaSafeBatchTransferFrom",
+				"outputs": [],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"constant": false,
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_from",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "_to",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_id",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_amount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bool",
+						"name": "_isGasFee",
+						"type": "bool"
+					},
+					{
+						"internalType": "bytes",
+						"name": "_data",
+						"type": "bytes"
+					}
+				],
+				"name": "metaSafeTransferFrom",
+				"outputs": [],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"constant": false,
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_owner",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "_operator",
+						"type": "address"
+					},
+					{
+						"internalType": "bool",
+						"name": "_approved",
+						"type": "bool"
+					},
+					{
+						"internalType": "bool",
+						"name": "_isGasFee",
+						"type": "bool"
+					},
+					{
+						"internalType": "bytes",
+						"name": "_data",
+						"type": "bytes"
+					}
+				],
+				"name": "metaSetApprovalForAll",
+				"outputs": [],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"methods": {
+				"metaSafeBatchTransferFrom(address,address,uint256[],uint256[],bool,bytes)": {
+					"params": {
+						"_amounts": "Transfer amounts per token type",
+						"_data": "Encodes a meta transfer indicator, signature, gas payment receipt and extra transfer data  _data should be encoded as ((bytes32 r, bytes32 s, uint8 v, SignatureType sigType), (GasReceipt g, bytes data))  i.e. high level encoding should be (bytes, bytes), where the latter bytes array is a nested bytes array",
+						"_from": "Source addresses",
+						"_ids": "IDs of each token type",
+						"_to": "Target addresses"
+					}
+				},
+				"metaSafeTransferFrom(address,address,uint256,uint256,bool,bytes)": {
+					"params": {
+						"_amount": "Transfered amount",
+						"_data": "Encodes a meta transfer indicator, signature, gas payment receipt and extra transfer data  _data should be encoded as ((bytes32 r, bytes32 s, uint8 v, SignatureType sigType), (GasReceipt g, bytes data))  i.e. high level encoding should be (bytes, bytes), where the latter bytes array is a nested bytes array",
+						"_from": "Source address",
+						"_id": "ID of the token type",
+						"_isGasFee": "Whether gas is reimbursed to executor or not",
+						"_to": "Target address"
+					}
+				},
+				"metaSetApprovalForAll(address,address,bool,bool,bytes)": {
+					"params": {
+						"_approved": "True if the operator is approved, false to revoke approval",
+						"_data": "Encodes signature and gas payment receipt  _data should be encoded as ((bytes32 r, bytes32 s, uint8 v, SignatureType sigType), (GasReceipt g))  i.e. high level encoding should be (bytes, bytes), where the latter bytes array is a nested bytes array",
+						"_isGasFee": "Whether gas will be reimbursed or not, with vlid signature",
+						"_operator": "Address to add to the set of authorized operators",
+						"_owner": "Address that wants to set operator status  _spender"
+					}
+				}
+			}
+		},
+		"userdoc": {
+			"methods": {
+				"metaSafeBatchTransferFrom(address,address,uint256[],uint256[],bool,bytes)": {
+					"notice": "Allows anyone with a valid signature to transfer multiple types of tokens on the bahalf of _from"
+				},
+				"metaSafeTransferFrom(address,address,uint256,uint256,bool,bytes)": {
+					"notice": "Allows anyone with a valid signature to transfer _amount amount of a token _id on the bahalf of _from"
+				},
+				"metaSetApprovalForAll(address,address,bool,bool,bytes)": {
+					"notice": "Approve the passed address to spend on behalf of _from if valid signature is provided"
+				}
+			}
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"localhost/dig/ERC1155/IERC1155Meta.sol": "IERC1155Meta"
+		},
+		"evmVersion": "istanbul",
+		"libraries": {},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"localhost/dig/ERC1155/IERC1155Meta.sol": {
+			"keccak256": "0xbaf4180ba7e5dc885829c152e591840f2bce09745c4d3728beea924a6cc24930",
+			"urls": [
+				"bzz-raw://b8612b09ca69d31056376bfd358dc28bae3f21f55febb5ce8a75664e98693854",
+				"dweb:/ipfs/QmPvjx2sgMSJmXge1i6G2maW8JAAkswPzymdHhqS2ExEgL"
+			]
+		}
+	},
+	"version": 1
+}

@@ -6,7 +6,7 @@
 	"output": {
 		"abi": [],
 		"devdoc": {
-			"details": "Wrappers over Solidity's arithmetic operations with added overflow checks. * Arithmetic operations in Solidity wrap on overflow. This can easily result in bugs, because programmers usually assume that an overflow raises an error, which is the standard behavior in high level programming languages. `SafeMath` restores this intuition by reverting the transaction when an operation overflows. * Using this library instead of the unchecked operations eliminates an entire class of bugs, so it's recommended to use it always.",
+			"details": "Wrappers over Solidity's arithmetic operations with added overflow checks.  * Arithmetic operations in Solidity wrap on overflow. This can easily result in bugs, because programmers usually assume that an overflow raises an error, which is the standard behavior in high level programming languages. `SafeMath` restores this intuition by reverting the transaction when an operation overflows.  * Using this library instead of the unchecked operations eliminates an entire class of bugs, so it's recommended to use it always.",
 			"methods": {}
 		},
 		"userdoc": {
@@ -27,10 +27,10 @@
 	},
 	"sources": {
 		"localhost/ERC20/SafeMath.sol": {
-			"keccak256": "0xa8f9de680f543620c352dc2aa968e14b3f82386bd4b87980656ca69174f6be68",
+			"keccak256": "0xfbb592ce5557f665566c655c562d8a30c59adffb8e9b6b1129a4eb2594dbd468",
 			"urls": [
-				"bzz-raw://cfd99c5eabd250142be224e0de458d06998479000c81aa3e87c9fc199b06709a",
-				"dweb:/ipfs/QmUSNbkCeUhEeJ9egrwjRZtuC2wBspja7yPaFp7CAcMYLd"
+				"bzz-raw://fa7b81ee50560de52a999771df0c18f0aef6074a536b729ecf91d8c482b2772d",
+				"dweb:/ipfs/QmWjMZKh1WFTR6hQxxKzALFtyd7mJVi8WGMqT4yswX2WxZ"
 			]
 		}
 	},

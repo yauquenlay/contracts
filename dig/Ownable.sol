@@ -1,4 +1,7 @@
-pragma solidity ^0.5.12;
+pragma solidity ^0.5.15;
+
+
+import "./SafeMath.sol";
 
 contract Context {
     
@@ -17,6 +20,8 @@ contract Context {
 }
 
 contract Ownable is Context {
+    
+    using SafeMath for uint256;
     
     address private _owner;
 

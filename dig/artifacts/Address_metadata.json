@@ -1,0 +1,37 @@
+{
+	"compiler": {
+		"version": "0.5.15+commit.6a57276f"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [],
+		"devdoc": {
+			"methods": {}
+		},
+		"userdoc": {
+			"methods": {}
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"localhost/dig/Address.sol": "Address"
+		},
+		"evmVersion": "istanbul",
+		"libraries": {},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"localhost/dig/Address.sol": {
+			"keccak256": "0x0021930110af0f6603fecb6a4b01c064199dd90050a54fa5b4277e829bd232f0",
+			"urls": [
+				"bzz-raw://10189545d568ca07c4690e950ab3e21b5740f8c3468aa60007e9f2343c28b68e",
+				"dweb:/ipfs/QmaWZUTKbGDvTUALkm7G7cr3XpCoAX1GkxwiTQaPuh3f2E"
+			]
+		}
+	},
+	"version": 1
+}
