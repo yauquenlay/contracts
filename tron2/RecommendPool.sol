@@ -196,5 +196,8 @@ contract RecommendPool is Ownable{
        ref.transfer(amount);
     }
     
+    function getCredit() public view returns(uint256){
+        return credit;
+    }
   
 }

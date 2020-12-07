@@ -1,0 +1,181 @@
+{
+	"compiler": {
+		"version": "0.5.17+commit.d19bba13"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"constant": true,
+				"inputs": [
+					{
+						"internalType": "uint8",
+						"name": "version",
+						"type": "uint8"
+					}
+				],
+				"name": "checkStart",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"constant": true,
+				"inputs": [],
+				"name": "getCommon",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "withdrawFee",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "partnerBecomePercent",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "partnerDirectPercent",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "partnerReferRewardPercent",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256[2]",
+						"name": "referRewardPercent",
+						"type": "uint256[2]"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"constant": true,
+				"inputs": [
+					{
+						"internalType": "uint8",
+						"name": "version",
+						"type": "uint8"
+					}
+				],
+				"name": "getStage",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "minimum",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "maximum",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "period",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "scale",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "totalSuply",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "startTime",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "partnerBecome",
+						"type": "uint256"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"constant": true,
+				"inputs": [
+					{
+						"internalType": "uint8",
+						"name": "version",
+						"type": "uint8"
+					}
+				],
+				"name": "partnerBecome",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"constant": true,
+				"inputs": [],
+				"name": "underway",
+				"outputs": [
+					{
+						"internalType": "uint8",
+						"name": "",
+						"type": "uint8"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"methods": {}
+		},
+		"userdoc": {
+			"methods": {}
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"browser/PZSSub.sol": "PZSConfig"
+		},
+		"evmVersion": "istanbul",
+		"libraries": {},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"browser/PZSSub.sol": {
+			"keccak256": "0xcc6b9b43732b7bda21a56c6d65329de91a41aa1be31b4b7da8e2dbe3b01f17e7",
+			"urls": [
+				"bzz-raw://1928cc11ddab6d72ea56c27dd270e1d71bacc906bbd986f51e46ae3356621440",
+				"dweb:/ipfs/QmWD16zXaYHGGZYD5DFcdAJQuf9V8PC9cSDJsEA9x58d5j"
+			]
+		}
+	},
+	"version": 1
+}

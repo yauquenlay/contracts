@@ -179,4 +179,8 @@ contract PrizePool is Ownable{
         lucky.transfer(amount);
     }
     
+    function getCredit() public view returns(uint256){
+        return credit;
+    }
+    
 }

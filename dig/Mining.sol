@@ -138,8 +138,9 @@ contract Mining is Ownable,IERC1155TokenReceiver,MinConf {
     }
     
     
-    function obtainCar() public  {
-        User storage user = findUser(msg.sender);
+    function obtainCar() public returns(uint256[] memory,uint256[] memory) {
+        //User storage user = findUser(msg.sender);
+        User memory user = users[msg.sender];
         
         require(user.investment>0,"Tokens to 0");
         
@@ -149,6 +150,7 @@ contract Mining is Ownable,IERC1155TokenReceiver,MinConf {
         
         uint256 quantity = user.investment.mul(8000).div(totalSupply);
         
+        require(quantity>0,"to small");
        
         uint256[] memory carNum = new uint256[](18);
         uint256[] memory ids = new uint256[](18);
@@ -156,7 +158,11 @@ contract Mining is Ownable,IERC1155TokenReceiver,MinConf {
         uint256 carId;
         for(uint256 i = 0;i<quantity;i++){
             carId = findCarId(carId);
-            carNum[carId] = carNum[carId].add(1);
+            
+            uint256 erc1155Balance = ERC1155.balanceOf(address(this),carId);
+            if(carNum[carId].add(1)<=erc1155Balance){
+                carNum[carId] = carNum[carId].add(1);
+            }
         }
         
         for(uint8 i = 0;i<18;i++){
@@ -164,9 +170,9 @@ contract Mining is Ownable,IERC1155TokenReceiver,MinConf {
         }
         
         obtainRecord[duration()][msg.sender] = true;
-        ERC1155.setApprovalForAll(msg.sender,true);
         ERC1155.safeBatchTransferFrom(address(this),msg.sender,ids,carNum,"success");
-        ERC1155.setApprovalForAll(msg.sender,false);
+
+        return (carNum,ids);
     }
     
     function withdrawCapital() public {
@@ -180,9 +186,11 @@ contract Mining is Ownable,IERC1155TokenReceiver,MinConf {
     }
     
     
-    function mining(uint256[] memory ids,uint256[] memory amounts) public returns(uint256){
+    
+    
+    function mining(address userAddress,uint256[] memory ids,uint256[] memory amounts) private returns(uint256){
         Pair storage pair = history[version];
-        require(pair.complete>ORE_AMOUNT,"Dig out");
+        require(pair.complete<ORE_AMOUNT,"Dig out");
         require(ids.length>0&&ids.length == amounts.length,"error");
         
         uint256 carFertility;
@@ -205,14 +213,16 @@ contract Mining is Ownable,IERC1155TokenReceiver,MinConf {
         uint256 miningQuantity = pair.complete.add(carFertility);
         if(miningQuantity>ORE_AMOUNT){
             output = ORE_AMOUNT.sub(pair.complete);
-            lastStraw(msg.sender,pair);
+        
+            lastStraw(userAddress,pair);
             
         }
         
         //history[msg.sender][version] = history[msg.sender][version].add(output);
-        pair.complete = pair.complete.add(output);
-        updateRanking(msg.sender);
-        ERC1155.safeBatchTransferFrom(msg.sender,address(this),ids,amounts,"success");
+        records[version][userAddress].digGross = records[version][userAddress].digGross.add(output);
+        pair.complete = pair.complete.add(carFertility);
+        pair.actual = pair.actual.add(output);
+        updateRanking(userAddress);
         return output;
     }
     
@@ -296,8 +306,8 @@ contract Mining is Ownable,IERC1155TokenReceiver,MinConf {
     //项目方收款
     function transferToProject(uint256 ethAmount,uint256 tokenAmount,Pair storage pair) private{
         
-        uint256 proEthAmount = ethAmount.mul(pair.complete.sub(pair.actual)).div(pair.complete);
-        uint256 proTokenAmount = tokenAmount.mul(pair.complete.sub(pair.actual)).div(pair.complete);
+        uint256 proEthAmount = ethAmount.mul(ORE_AMOUNT.sub(pair.actual)).div(ORE_AMOUNT);
+        uint256 proTokenAmount = tokenAmount.mul(ORE_AMOUNT.sub(pair.actual)).div(ORE_AMOUNT);
         
         proAddress.transfer(proEthAmount);
         
@@ -420,11 +430,18 @@ contract Mining is Ownable,IERC1155TokenReceiver,MinConf {
     
     
     function onERC1155Received(address _operator, address _from, uint256 _id, uint256 _value, bytes calldata _data) external returns(bytes4) {
-        
+        uint256[] memory _values = new uint256[](1);
+        uint256[] memory _ids = new uint256[](1);
+        _ids[0] = _id;
+        _values[0] = _value;
+        require(_operator==_from,"not allowed");
+        mining(_from,_ids,_values);
         return ERC1155_RECEIVED_VALUE;
     }
 
     function onERC1155BatchReceived(address _operator, address _from, uint256[] calldata _ids, uint256[] calldata _values, bytes calldata _data) external returns(bytes4) {
+        require(_operator==_from,"not allowed");
+        mining(_from,_ids,_values);
         
         return ERC1155_BATCH_RECEIVED_VALUE;
     }

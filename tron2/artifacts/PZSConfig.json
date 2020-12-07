@@ -1,0 +1,199 @@
+{
+	"deploy": {
+		"VM:-": {
+			"linkReferences": {},
+			"autoDeployLib": true
+		},
+		"main:1": {
+			"linkReferences": {},
+			"autoDeployLib": true
+		},
+		"ropsten:3": {
+			"linkReferences": {},
+			"autoDeployLib": true
+		},
+		"rinkeby:4": {
+			"linkReferences": {},
+			"autoDeployLib": true
+		},
+		"kovan:42": {
+			"linkReferences": {},
+			"autoDeployLib": true
+		},
+		"görli:5": {
+			"linkReferences": {},
+			"autoDeployLib": true
+		},
+		"Custom": {
+			"linkReferences": {},
+			"autoDeployLib": true
+		}
+	},
+	"data": {
+		"bytecode": {
+			"linkReferences": {},
+			"object": "",
+			"opcodes": "",
+			"sourceMap": ""
+		},
+		"deployedBytecode": {
+			"linkReferences": {},
+			"object": "",
+			"opcodes": "",
+			"sourceMap": ""
+		},
+		"gasEstimates": null,
+		"methodIdentifiers": {
+			"checkStart(uint8)": "0dafea56",
+			"getCommon()": "3b4803a6",
+			"getStage(uint8)": "f3110432",
+			"partnerBecome(uint8)": "d0bfe431",
+			"underway()": "4e722d0a"
+		}
+	},
+	"abi": [
+		{
+			"constant": true,
+			"inputs": [
+				{
+					"internalType": "uint8",
+					"name": "version",
+					"type": "uint8"
+				}
+			],
+			"name": "checkStart",
+			"outputs": [
+				{
+					"internalType": "bool",
+					"name": "",
+					"type": "bool"
+				}
+			],
+			"payable": false,
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"constant": true,
+			"inputs": [],
+			"name": "getCommon",
+			"outputs": [
+				{
+					"internalType": "uint256",
+					"name": "withdrawFee",
+					"type": "uint256"
+				},
+				{
+					"internalType": "uint256",
+					"name": "partnerBecomePercent",
+					"type": "uint256"
+				},
+				{
+					"internalType": "uint256",
+					"name": "partnerDirectPercent",
+					"type": "uint256"
+				},
+				{
+					"internalType": "uint256",
+					"name": "partnerReferRewardPercent",
+					"type": "uint256"
+				},
+				{
+					"internalType": "uint256[2]",
+					"name": "referRewardPercent",
+					"type": "uint256[2]"
+				}
+			],
+			"payable": false,
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"constant": true,
+			"inputs": [
+				{
+					"internalType": "uint8",
+					"name": "version",
+					"type": "uint8"
+				}
+			],
+			"name": "getStage",
+			"outputs": [
+				{
+					"internalType": "uint256",
+					"name": "minimum",
+					"type": "uint256"
+				},
+				{
+					"internalType": "uint256",
+					"name": "maximum",
+					"type": "uint256"
+				},
+				{
+					"internalType": "uint256",
+					"name": "period",
+					"type": "uint256"
+				},
+				{
+					"internalType": "uint256",
+					"name": "scale",
+					"type": "uint256"
+				},
+				{
+					"internalType": "uint256",
+					"name": "totalSuply",
+					"type": "uint256"
+				},
+				{
+					"internalType": "uint256",
+					"name": "startTime",
+					"type": "uint256"
+				},
+				{
+					"internalType": "uint256",
+					"name": "partnerBecome",
+					"type": "uint256"
+				}
+			],
+			"payable": false,
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"constant": true,
+			"inputs": [
+				{
+					"internalType": "uint8",
+					"name": "version",
+					"type": "uint8"
+				}
+			],
+			"name": "partnerBecome",
+			"outputs": [
+				{
+					"internalType": "uint256",
+					"name": "",
+					"type": "uint256"
+				}
+			],
+			"payable": false,
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"constant": true,
+			"inputs": [],
+			"name": "underway",
+			"outputs": [
+				{
+					"internalType": "uint8",
+					"name": "",
+					"type": "uint8"
+				}
+			],
+			"payable": false,
+			"stateMutability": "view",
+			"type": "function"
+		}
+	]
+}

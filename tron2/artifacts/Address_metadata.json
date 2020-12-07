@@ -6,6 +6,7 @@
 	"output": {
 		"abi": [],
 		"devdoc": {
+			"details": "Collection of functions related to the address type",
 			"methods": {}
 		},
 		"userdoc": {
@@ -14,7 +15,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"localhost/dig/ERC1155/ERC1155Tradable.sol": "OwnableDelegateProxy"
+			"browser/PZSSub.sol": "Address"
 		},
 		"evmVersion": "istanbul",
 		"libraries": {},
@@ -25,11 +26,11 @@
 		"remappings": []
 	},
 	"sources": {
-		"localhost/dig/ERC1155/ERC1155Tradable.sol": {
-			"keccak256": "0xcd984425251c88d2a9ed8d7fcd01435972ea5d1f47580adcc821994305b9af1a",
+		"browser/PZSSub.sol": {
+			"keccak256": "0xcc6b9b43732b7bda21a56c6d65329de91a41aa1be31b4b7da8e2dbe3b01f17e7",
 			"urls": [
-				"bzz-raw://ecd6a79da79b3991306fc19a7eedf6f829eada1f2e17e51f75e8d3c87074d13d",
-				"dweb:/ipfs/QmWD3aNavL3gj2rv21s5eaWm2nZUjpE7XkvabqEa4ZsUJc"
+				"bzz-raw://1928cc11ddab6d72ea56c27dd270e1d71bacc906bbd986f51e46ae3356621440",
+				"dweb:/ipfs/QmWD16zXaYHGGZYD5DFcdAJQuf9V8PC9cSDJsEA9x58d5j"
 			]
 		}
 	},

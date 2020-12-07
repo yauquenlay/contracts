@@ -129,13 +129,11 @@ contract Ownable is Context {
 
 interface PrizePool {
     
-    function deposit() external payable;
-    
     function allotPrize(address lucky, uint256 amount) external;
     
     function withdraw(address payable lucky,uint256 amount) external returns (uint256);
     
-    function credit() external view returns(uint256);
+    function getCredit() external view returns(uint256);
     
     function permissions(address userAddress) external view returns (bool);
     
@@ -144,15 +142,13 @@ interface PrizePool {
 
 interface RecommendPool {
     
-    function deposit() external payable;
-    
     function allotBonus(address[5] calldata ranking,uint256 timePointer) external;
     
     function withdraw(address payable ref,uint256 amount) external;
     
     function allowances(address) external view returns(uint256);
     
-    function credit() external view returns(uint256);
+    function getCredit() external view returns(uint256);
 }
 
 contract Tron2Config{
@@ -207,8 +203,8 @@ contract Tron2 is Ownable,Tron2Config{
         prizePoolAdress = _prizePoolAdress;
         recommendPoolAddress = _recommendPoolAddress;
         
-        PrizePool prizePool = PrizePool(_prizePoolAdress);
-        RecommendPool recommendPool = RecommendPool(_recommendPoolAddress);
+        prizePool = PrizePool(_prizePoolAdress);
+        recommendPool = RecommendPool(_recommendPoolAddress);
     }
 
     struct Deposit {
@@ -256,8 +252,8 @@ contract Tron2 is Ownable,Tron2Config{
 
 
 
-    PrizePool prizePool;
-    RecommendPool recommendPool;
+    PrizePool public prizePool;
+    RecommendPool public recommendPool;
     
     address payable private leaderPoolAddress;
     address payable public tron1PoolAddress;
@@ -341,16 +337,16 @@ contract Tron2 is Ownable,Tron2Config{
                 players[ref].refsCount = players[ref].refsCount.add(1);
             }
 
-            players[ref].deposits[0] = createDeposit(0,0,0);
+            players[ref].deposits.push(createDeposit(0,0,0));
         }
     }
     
     function _allotPool(uint256 amount) private {
         
-        leaderPoolAddress.transfer(amount.mul(LEADER_PERCENT));
-        tron1PoolAddress.transfer(amount.mul(TRON1_PERCENT));
-        prizePoolAdress.transfer(amount.mul(LUCKY_PERCENT));
-        recommendPoolAddress.transfer(amount.mul(RECOMMEND_PERCENT));
+        leaderPoolAddress.transfer(amount.mul(LEADER_PERCENT).div(100));
+        tron1PoolAddress.transfer(amount.mul(TRON1_PERCENT).div(100));
+        //prizePoolAdress.transfer(amount.mul(LUCKY_PERCENT).div(100));
+       // recommendPoolAddress.transfer(amount.mul(RECOMMEND_PERCENT).div(100));
         
     }
     
@@ -368,7 +364,7 @@ contract Tron2 is Ownable,Tron2Config{
         
         luckyPrize = amount.mul(luckyPercentLimit[luckyType]).div(100);
         
-        if(prizePool.credit()>=luckyPrize){
+        if(prizePool.getCredit()>=luckyPrize){
             if(luckyPrize>0){
                 prizePool.allotPrize(msg.sender,luckyPrize);
             }
@@ -429,12 +425,6 @@ contract Tron2 is Ownable,Tron2Config{
         return ranking;
     }
     
-    function allotBonus() public {
-        if(timePointer<duration()){
-            
-        }
-    }
-    
     modifier settleBonus(){
         if(RECOMMEND_AUTO){
             settlePerformance();
@@ -455,7 +445,7 @@ contract Tron2 is Ownable,Tron2Config{
         performances[duration()][ref] = performances[duration()][ref].add(amount);
     }
 
-    function makeDeposit(address payable ref, uint8 modelType) public payable settleBonus returns (bool) {
+    function makeDeposit(address payable ref, uint8 modelType) public payable /*settleBonus*/ returns (bool) {
 
         require(now>=START_TIME,"Activity not started");
 
@@ -468,9 +458,9 @@ contract Tron2 is Ownable,Tron2Config{
         Player storage player = players[msg.sender];
         require(player.active || ref != msg.sender, "Referal can't refer to itself");
 
-        if(modelType == 0){
+        /*if(modelType == 0){
             require(player.deposits[0].id == 0,"There can only be one A contract");
-        }
+        }*/
 
         _checkOverLimit(modelType,msg.value,player.accumulatives);
 
@@ -482,7 +472,7 @@ contract Tron2 is Ownable,Tron2Config{
 
         _teamCount(player.referrer,msg.value,isActive);
         
-        _allotPool(msg.value);
+        //_allotPool(msg.value);
 
         uint256 depositId = _genDepositId(modelType,msg.value);
         
@@ -713,8 +703,8 @@ contract Tron2 is Ownable,Tron2Config{
     function getGlobalStats() external view returns (uint256[5] memory stats) {
         stats[0] = totalDepositAmount;
         stats[1] = address(this).balance;
-        stats[2] = prizePool.credit();
-        stats[3] = recommendPool.credit();
+        stats[2] = prizePool.getCredit();
+        stats[3] = recommendPool.getCredit();
         stats[4] = playersCount;
     
     }

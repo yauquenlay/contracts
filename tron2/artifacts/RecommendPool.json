@@ -46,8 +46,7 @@
 		"methodIdentifiers": {
 			"allotBonus(address[5],uint256)": "db1f9aeb",
 			"allowances(address)": "2b603c71",
-			"credit()": "a06d083c",
-			"deposit()": "d0e30db0",
+			"getCredit()": "59296e7b",
 			"withdraw(address,uint256)": "f3fef3a3"
 		}
 	},
@@ -96,7 +95,7 @@
 		{
 			"constant": true,
 			"inputs": [],
-			"name": "credit",
+			"name": "getCredit",
 			"outputs": [
 				{
 					"internalType": "uint256",
@@ -106,15 +105,6 @@
 			],
 			"payable": false,
 			"stateMutability": "view",
-			"type": "function"
-		},
-		{
-			"constant": false,
-			"inputs": [],
-			"name": "deposit",
-			"outputs": [],
-			"payable": true,
-			"stateMutability": "payable",
 			"type": "function"
 		},
 		{

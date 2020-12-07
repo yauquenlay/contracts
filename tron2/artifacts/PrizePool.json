@@ -45,8 +45,7 @@
 		"gasEstimates": null,
 		"methodIdentifiers": {
 			"allotPrize(address,uint256)": "f09e9b22",
-			"credit()": "a06d083c",
-			"deposit()": "d0e30db0",
+			"getCredit()": "59296e7b",
 			"permissions(address)": "01e88208",
 			"prizes(address)": "b35d11bf",
 			"withdraw(address,uint256)": "f3fef3a3"
@@ -76,7 +75,7 @@
 		{
 			"constant": true,
 			"inputs": [],
-			"name": "credit",
+			"name": "getCredit",
 			"outputs": [
 				{
 					"internalType": "uint256",
@@ -86,15 +85,6 @@
 			],
 			"payable": false,
 			"stateMutability": "view",
-			"type": "function"
-		},
-		{
-			"constant": false,
-			"inputs": [],
-			"name": "deposit",
-			"outputs": [],
-			"payable": true,
-			"stateMutability": "payable",
 			"type": "function"
 		},
 		{

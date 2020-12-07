@@ -1,6 +1,6 @@
 {
 	"compiler": {
-		"version": "0.5.15+commit.6a57276f"
+		"version": "0.5.17+commit.d19bba13"
 	},
 	"language": "Solidity",
 	"output": {
@@ -136,10 +136,10 @@
 			]
 		},
 		"localhost/dig/Mining.sol": {
-			"keccak256": "0x02bb1c928d1bfa21c71efb84fcc8084a2b3243fc58f76e21c16920ec441a2b18",
+			"keccak256": "0x16f6a01a0894631351adff7f8691e7c8b08bff1e434da1def00f0266faa811c3",
 			"urls": [
-				"bzz-raw://6328165b88095bc983b301c80c4d0147c2c56b70cbd5334cf78371d5031a9b5d",
-				"dweb:/ipfs/QmQc47CEf5vTBSz9h7dGmS5itzDzjamca6V6xgVwgdsTo5"
+				"bzz-raw://c8f38f83295151f8f2ef3b62d4f8360dafb238a64e867598f1af70d2e45dc204",
+				"dweb:/ipfs/QmNxu9jrBj7NsdGTgde9LkZk4669GwhGm4fxucCFPVU4rW"
 			]
 		},
 		"localhost/dig/Ownable.sol": {
