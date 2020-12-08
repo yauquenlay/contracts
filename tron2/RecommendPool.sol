@@ -171,8 +171,6 @@ contract RecommendPool is Ownable{
     }
     
     function allotBonus(address[5] calldata ranking,uint256 timePointer) external onlyContractAllow permission returns (uint256) {
-       
-        require(timePointer>0,"not allowed now");
         
         //结算前一天
         require(!settleStatus[timePointer],"Has been settled");

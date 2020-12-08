@@ -1,6 +1,6 @@
 {
 	"compiler": {
-		"version": "0.5.15+commit.6a57276f"
+		"version": "0.5.17+commit.d19bba13"
 	},
 	"language": "Solidity",
 	"output": {
@@ -21,7 +21,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"localhost/dig/ERC1155/ERC1155Tradable.sol": "Context"
+			"browser/project/TronContract.sol": "Model"
 		},
 		"evmVersion": "istanbul",
 		"libraries": {},
@@ -32,11 +32,11 @@
 		"remappings": []
 	},
 	"sources": {
-		"localhost/dig/ERC1155/ERC1155Tradable.sol": {
-			"keccak256": "0xd8b7a88cd16c7733f90d50820a58ae088d8b246c0597376fbd25824ac180fd32",
+		"browser/project/TronContract.sol": {
+			"keccak256": "0x224300f3f54f81cb12cfaf9cf57ebc84b47365e7c256bc3f897c33fdb6e1ef68",
 			"urls": [
-				"bzz-raw://0efc8bc5d3839948db85be3a9374da4bc47a0890f2776958dbcaed1b3594f4df",
-				"dweb:/ipfs/QmSmF2DsQRim64Tu3wxMzpPVZmDTSKTGtdCP3zwmcL8Edg"
+				"bzz-raw://b1d7a2541a1bd707daa5fb0962ff590c1a84bacfe3f1a4a60a497156251af359",
+				"dweb:/ipfs/QmXiS3dRD4FqhafvSpB66ixj9dgaDWNAVMVZRaezUKhnYA"
 			]
 		}
 	},

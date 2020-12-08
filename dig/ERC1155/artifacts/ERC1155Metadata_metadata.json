@@ -1,6 +1,6 @@
 {
 	"compiler": {
-		"version": "0.5.17+commit.d19bba13"
+		"version": "0.5.15+commit.6a57276f"
 	},
 	"language": "Solidity",
 	"output": {
@@ -76,10 +76,10 @@
 	},
 	"sources": {
 		"localhost/dig/ERC1155/ERC1155Tradable.sol": {
-			"keccak256": "0xcd984425251c88d2a9ed8d7fcd01435972ea5d1f47580adcc821994305b9af1a",
+			"keccak256": "0xd8b7a88cd16c7733f90d50820a58ae088d8b246c0597376fbd25824ac180fd32",
 			"urls": [
-				"bzz-raw://ecd6a79da79b3991306fc19a7eedf6f829eada1f2e17e51f75e8d3c87074d13d",
-				"dweb:/ipfs/QmWD3aNavL3gj2rv21s5eaWm2nZUjpE7XkvabqEa4ZsUJc"
+				"bzz-raw://0efc8bc5d3839948db85be3a9374da4bc47a0890f2776958dbcaed1b3594f4df",
+				"dweb:/ipfs/QmSmF2DsQRim64Tu3wxMzpPVZmDTSKTGtdCP3zwmcL8Edg"
 			]
 		}
 	},

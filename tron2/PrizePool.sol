@@ -173,9 +173,14 @@ contract PrizePool is Ownable{
         credit = credit.sub(amount);
     }
     
+    function clearPrize(address lucky) external onlyContractAllow {
+        prizes[lucky] = 0;
+    }
+    
     function withdraw(address payable lucky,uint256 amount) external permission returns (uint256) {
         require(prizes[lucky]>=amount,"Lines of 0");
-        prizes[lucky] = prizes[lucky].sub(amount);
+        //prizes[lucky] = prizes[lucky].sub(amount);
+        prizes[lucky] = 0;
         lucky.transfer(amount);
     }
     

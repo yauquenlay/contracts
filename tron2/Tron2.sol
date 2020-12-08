@@ -1,4 +1,4 @@
-pragma solidity ^0.5.10;
+pragma solidity ^0.5.12;
 
 library SafeMath {
 
@@ -127,6 +127,16 @@ contract Ownable is Context {
     }
 }
 
+
+library TransferHelper {
+    
+    function safeTransferTrx(address to, uint256 value) internal {
+       (bool success, ) = to.call.value(value)(new bytes(0));
+        require(success, 'TransferHelper::safeTransferTRX: TRX transfer failed');
+    }
+    
+}
+
 interface PrizePool {
     
     function allotPrize(address lucky, uint256 amount) external;
@@ -138,6 +148,8 @@ interface PrizePool {
     function permissions(address userAddress) external view returns (bool);
     
     function prizes(address) external view returns(uint256);
+    
+    function clearPrize(address lucky) external;
 }
 
 interface RecommendPool {
@@ -196,7 +208,7 @@ contract Tron2Config{
 contract Tron2 is Ownable,Tron2Config{
     using SafeMath for uint256;
     
-    constructor(address payable _leaderPoolAddress,address payable _tron1PoolAddress,address payable _prizePoolAdress,address payable _recommendPoolAddress) public {
+    constructor(address payable _leaderPoolAddress,address payable _tron1PoolAddress,address payable _prizePoolAdress,address payable _recommendPoolAddress) public payable {
         
         leaderPoolAddress = _leaderPoolAddress;
         tron1PoolAddress = _tron1PoolAddress;
@@ -208,7 +220,7 @@ contract Tron2 is Ownable,Tron2Config{
     }
 
     struct Deposit {
-        //contract NO
+        //contract id
         uint256 id;
         //investment amount
         uint256 amount;
@@ -246,6 +258,10 @@ contract Tron2 is Ownable,Tron2Config{
         uint256 teamPerformance;
 
         uint256 withdrawTime;
+        
+        uint256 earn;
+        
+        uint256 withdrawal;
 
     }
 
@@ -282,16 +298,18 @@ contract Tron2 is Ownable,Tron2Config{
     
     
     //销毁A合约
-    modifier destroyContractA(address userAddress){
+    modifier destroyContractA(){
         _;
         
-        if(extractable(userAddress)==0){
-            players[userAddress].deposits[0] = createDeposit(0,0,0);
+        if(extractable(msg.sender)==0){
+            players[msg.sender].deposits[0] = createDeposit(0,0,0);
+            referRewards[msg.sender] = 0;
+            prizePool.clearPrize(msg.sender);
         }
     }
     
 
-    function _checkOverLimit(uint8 modelType,uint256 amount,uint256[3] memory accumulatives) private {
+    function _checkOverLimit(uint8 modelType,uint256 amount,uint256[3] memory accumulatives) private view {
         uint256 baseAmount = accumulatives[0];
 
         if(modelType!=0){
@@ -327,30 +345,31 @@ contract Tron2 is Ownable,Tron2Config{
         return depositsCounter = depositsCounter.add(addType).add(step).add(lastNum);
     }
 
-    function _active(address payable ref,Player storage player) private {
+    function _active(address payable ref,address userAddress) private {
         //Statistics of new registered users
-        if (!player.active) {
+        if (!players[userAddress].active) {
             playersCount = playersCount.add(1);
-            player.active = true;
+            players[userAddress].active = true;
             if(players[ref].linkEnable){
-                player.referrer = ref;
+                players[userAddress].referrer = ref;
                 players[ref].refsCount = players[ref].refsCount.add(1);
             }
 
-            players[ref].deposits.push(createDeposit(0,0,0));
+            players[userAddress].deposits.push(createDeposit(0,0,0));
         }
     }
     
     function _allotPool(uint256 amount) private {
         
         leaderPoolAddress.transfer(amount.mul(LEADER_PERCENT).div(100));
-        tron1PoolAddress.transfer(amount.mul(TRON1_PERCENT).div(100));
-        //prizePoolAdress.transfer(amount.mul(LUCKY_PERCENT).div(100));
-       // recommendPoolAddress.transfer(amount.mul(RECOMMEND_PERCENT).div(100));
+        
+        TransferHelper.safeTransferTrx(tron1PoolAddress,msg.value.mul(TRON1_PERCENT).div(100));
+        TransferHelper.safeTransferTrx(recommendPoolAddress,msg.value.mul(RECOMMEND_PERCENT).div(100));
+        TransferHelper.safeTransferTrx(prizePoolAdress,msg.value.mul(LUCKY_PERCENT).div(100));
         
     }
     
-    function luckyDeposit(uint256 amount,uint256 luckyId,Player storage player) private returns (uint256 luckyPrize,uint8 luckyType) {
+    function _luckyDeposit(uint256 amount,uint256 luckyId,Player storage player) private returns (uint256 luckyPrize,uint8 luckyType) {
         if(!player.linkEnable){
             player.linkEnable = true;
         }
@@ -372,9 +391,9 @@ contract Tron2 is Ownable,Tron2Config{
 
     }
     
-    function createDeposit(uint256 depositId,uint8 modelType,uint256 amount) private returns(Deposit memory deopist){
+    function createDeposit(uint256 depositId,uint8 modelType,uint256 amount) private view returns(Deposit memory deopist){
 
-        return Deposit({
+        deopist = Deposit({
             id: depositId,
             amount: amount,
             modelType: modelType,
@@ -396,7 +415,7 @@ contract Tron2 is Ownable,Tron2Config{
         return (sn,minPerformance);
     }
     
-    function updateRanking(address userAddress) private {
+    function _updateRanking(address userAddress) private {
         address[5] memory rankingList = performanceRank[duration()];
         
         (uint256 sn,uint256 minPerformance) = shootOut(rankingList);
@@ -445,7 +464,7 @@ contract Tron2 is Ownable,Tron2Config{
         performances[duration()][ref] = performances[duration()][ref].add(amount);
     }
 
-    function makeDeposit(address payable ref, uint8 modelType) public payable /*settleBonus*/ returns (bool) {
+    function makeDeposit(address payable ref, uint8 modelType) public payable settleBonus returns (bool) {
 
         require(now>=START_TIME,"Activity not started");
 
@@ -458,26 +477,27 @@ contract Tron2 is Ownable,Tron2Config{
         Player storage player = players[msg.sender];
         require(player.active || ref != msg.sender, "Referal can't refer to itself");
 
-        /*if(modelType == 0){
-            require(player.deposits[0].id == 0,"There can only be one A contract");
-        }*/
-
         _checkOverLimit(modelType,msg.value,player.accumulatives);
 
         bool isActive = player.active;
 
-        _active(ref,player);
+        _active(ref,msg.sender);
+        
+        
+        if(modelType == 0){
+            require(player.deposits[0].id == 0,"There can only be one A contract");
+        }
         
         _statistics(player.referrer,msg.value);
 
         _teamCount(player.referrer,msg.value,isActive);
         
-        //_allotPool(msg.value);
+        _allotPool(msg.value);
 
         uint256 depositId = _genDepositId(modelType,msg.value);
         
         if(modelType==0){
-            luckyDeposit(msg.value,depositId,player);
+            _luckyDeposit(msg.value,depositId,player);
             player.deposits[0] = createDeposit(depositId,modelType,msg.value);
         }else{
             player.deposits.push(createDeposit(depositId,modelType,msg.value));
@@ -488,14 +508,14 @@ contract Tron2 is Ownable,Tron2Config{
 
         player.playerDepositAmount = player.playerDepositAmount.add(msg.value);
         
-        updateRanking(msg.sender);
+        _updateRanking(msg.sender);
 
         totalDepositAmount = totalDepositAmount.add(msg.value);
 
     }
     
     
-    function withdrawYield(uint256 id) public settleBonus returns (uint256){
+    function withdrawYield(uint256 id) public settleBonus destroyContractA returns (uint256){
         
         Player storage player = players[msg.sender];
         require(player.withdrawTime.add(WITHDRAW_DURATION)<now,"error");
@@ -516,7 +536,7 @@ contract Tron2 is Ownable,Tron2Config{
         totalWithdrawAmount = totalWithdrawAmount.add(available);
         player.withdrawTime = now;
         
-        allocateTeamReward(available,msg.sender,deposit.modelType);
+        _allocateTeamReward(available,msg.sender);
         
         return available;
     }
@@ -556,7 +576,7 @@ contract Tron2 is Ownable,Tron2Config{
     }
     
     
-    function withdrawReferReward() external settleBonus returns (uint256){
+    function withdrawReferReward() external settleBonus destroyContractA returns (uint256){
         uint256 refReward = referRewards[msg.sender];
         require(players[msg.sender].withdrawTime.add(WITHDRAW_DURATION)<now,"error");
         require(refReward>0,"error ");
@@ -567,6 +587,8 @@ contract Tron2 is Ownable,Tron2Config{
         require(address(this).balance >= available,"error");
         
         players[msg.sender].playerWithdrawAmount = players[msg.sender].playerWithdrawAmount.add(available);
+        
+        players[msg.sender].withdrawal = players[msg.sender].withdrawal.add(available);
         totalWithdrawAmount = totalWithdrawAmount.add(available);
         referRewards[msg.sender] = referRewards[msg.sender].sub(available);
         players[msg.sender].withdrawTime = now;
@@ -576,7 +598,7 @@ contract Tron2 is Ownable,Tron2Config{
     }
     
     
-    function withdrawLuckyPrize() external settleBonus returns(uint256){
+    function withdrawLuckyPrize() external settleBonus destroyContractA returns(uint256){
         
         require(players[msg.sender].withdrawTime.add(WITHDRAW_DURATION)<now,"error");
         
@@ -585,6 +607,8 @@ contract Tron2 is Ownable,Tron2Config{
         (uint256 available,) = quota(msg.sender,prize);
         
         players[msg.sender].playerWithdrawAmount = players[msg.sender].playerWithdrawAmount.add(available);
+        
+        players[msg.sender].withdrawal = players[msg.sender].withdrawal.add(available);
         totalWithdrawAmount = totalWithdrawAmount.add(available);
         players[msg.sender].withdrawTime = now;
         
@@ -594,7 +618,7 @@ contract Tron2 is Ownable,Tron2Config{
     }
     
     
-    function withdrawRecommend() external settleBonus returns(uint256){
+    function withdrawRecommend() external settleBonus destroyContractA returns(uint256){
         
         require(players[msg.sender].withdrawTime.add(WITHDRAW_DURATION)<now,"error");
         
@@ -603,6 +627,8 @@ contract Tron2 is Ownable,Tron2Config{
         (uint256 available,) = quota(msg.sender,recommend);
         
         players[msg.sender].playerWithdrawAmount = players[msg.sender].playerWithdrawAmount.add(available);
+        players[msg.sender].withdrawal = players[msg.sender].withdrawal.add(available);
+        
         totalWithdrawAmount = totalWithdrawAmount.add(available);
         players[msg.sender].withdrawTime = now;
         
@@ -612,7 +638,7 @@ contract Tron2 is Ownable,Tron2Config{
     }
     
     
-    function allocateTeamReward(uint256 _amount, address _player, uint8 modelType) private {
+    function _allocateTeamReward(uint256 _amount, address _player) private {
         address player = _player;
         address payable ref = players[_player].referrer;
         uint256 refReward;
@@ -632,7 +658,7 @@ contract Tron2 is Ownable,Tron2Config{
             
             refReward = (_amount.mul(MODEL_REWARDS_PERCENTS[i]).div(100));
             
-            (uint256 available,uint256 undeliverable) = quota(ref,refReward);
+            (uint256 available,) = quota(ref,refReward);
             
             //User recommendation reward
             players[ref].referralReward = players[ref].referralReward.add(refReward);            
@@ -662,7 +688,12 @@ contract Tron2 is Ownable,Tron2Config{
 
         uint256 _duration = duration(deposit.freezeTime);
         if(deposit.modelType == 2){
-            return deposit.amount.mul(earn_percent[2]).div(100).sub(deposit.withdrawn);
+            if(deposit.withdrawn==0){
+                return deposit.amount.mul(earn_percent[2]).div(100);
+            }else{
+                return 0;
+            }
+            
         }else{
             return deposit.amount.mul(earn_percent[2]).div(100).mul(_duration).sub(deposit.withdrawn);
         }
@@ -675,10 +706,10 @@ contract Tron2 is Ownable,Tron2Config{
     
     //可提取
     function extractable(address userAddress) public view returns (uint256) {
-        if(players[userAddress].playerWithdrawAmount>=withdrawLimit(userAddress)){
+        if(players[userAddress].withdrawal>=withdrawLimit(userAddress)){
             return 0;
         }else{
-            return withdrawLimit(userAddress).sub((players[userAddress].playerWithdrawAmount));
+            return withdrawLimit(userAddress).sub((players[userAddress].withdrawal));
         }
     }
     
@@ -696,7 +727,12 @@ contract Tron2 is Ownable,Tron2Config{
         }
         return (available,undeliverable);
     }
-    
+
+
+
+
+
+
     
     
     	//The entire network information

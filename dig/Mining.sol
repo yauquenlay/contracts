@@ -22,6 +22,8 @@ contract MinConf{
     uint256[10] public  RANKING_AWARD_PERCENT = [10,5,3,1,1,1,1,1,1,1];
     
     uint256 public constant LAST_STRAW_PERCNET = 5;
+    
+    uint256[2] public  OUT_RATE = [1,1];
 }
 
 contract Mining is Ownable,IERC1155TokenReceiver,MinConf {
@@ -103,6 +105,7 @@ contract Mining is Ownable,IERC1155TokenReceiver,MinConf {
     mapping(uint256=>Car) public cars;
     
     mapping(uint256=>mapping(address=>bool)) public obtainRecord;
+    mapping(uint256=>uint256) erc1155Original;
    
     
     uint256[18] public carIds;
@@ -146,9 +149,19 @@ contract Mining is Ownable,IERC1155TokenReceiver,MinConf {
         
         
         require(!obtainRecord[duration()][msg.sender],"Have been received");
+        
+         (uint256[18] memory _carIds,uint256 len,uint256 erc1155Amount) = avi(); 
+         require(len>0,"not enough ercll55");
+         
+         uint256 original1155 = erc1155Original[duration()];
+         if(original1155==0){
+             original1155 = erc1155Amount;
+             erc1155Original[duration()] = erc1155Amount;
+         }
+         
         uint256 totalSupply = ERC20Token.totalSupply();
         
-        uint256 quantity = user.investment.mul(8000).div(totalSupply);
+        uint256 quantity = user.investment.mul(original1155).mul(OUT_RATE[0]).div(totalSupply).div(OUT_RATE[1]);
         
         require(quantity>0,"to small");
        
@@ -156,12 +169,23 @@ contract Mining is Ownable,IERC1155TokenReceiver,MinConf {
         uint256[] memory ids = new uint256[](18);
  
         uint256 carId;
+        
+       
         for(uint256 i = 0;i<quantity;i++){
-            carId = findCarId(carId);
             
+            uint256 sn = findCarId(carId,len);
+            
+            carId = _carIds[sn];
             uint256 erc1155Balance = ERC1155.balanceOf(address(this),carId);
-            if(carNum[carId].add(1)<=erc1155Balance){
-                carNum[carId] = carNum[carId].add(1);
+            carNum[carId] = carNum[carId].add(1);
+            
+            if(carNum[carId]==erc1155Balance){
+                
+                if(len>0){
+                    len = len-1;
+                    _carIds[sn] = _carIds[len];
+                }
+                
             }
         }
         
@@ -174,6 +198,22 @@ contract Mining is Ownable,IERC1155TokenReceiver,MinConf {
 
         return (carNum,ids);
     }
+    
+    
+    function avi() public view returns(uint256[18] memory _carIds,uint256 len,uint256 erc1155Amount){
+        
+        for(uint8 i = 0;i<18;i++){
+            uint256 amount = ERC1155.balanceOf(address(this),i+1);
+            if(amount!=0){
+                _carIds[len] = i+1;
+                len++;
+                erc1155Amount = erc1155Amount.add(amount);
+            }
+        }
+        
+    }
+    
+    
     
     function withdrawCapital() public {
         require(!obtainRecord[duration()][msg.sender],"Have been received");
@@ -214,7 +254,7 @@ contract Mining is Ownable,IERC1155TokenReceiver,MinConf {
         if(miningQuantity>ORE_AMOUNT){
             output = ORE_AMOUNT.sub(pair.complete);
         
-            lastStraw(userAddress,pair);
+            _lastStraw(userAddress,pair);
             
         }
         
@@ -292,7 +332,7 @@ contract Mining is Ownable,IERC1155TokenReceiver,MinConf {
         return rank;
     }
     
-    function lastStraw(address userAddress,Pair storage pair) private{
+    function _lastStraw(address userAddress,Pair storage pair) private{
         (uint256 ethAmount,uint256 tokenAmount) = pairSwap.getPairAmount();
         pair.ethAmount = ethAmount;
         pair.tokenAmount = tokenAmount;
@@ -373,9 +413,9 @@ contract Mining is Ownable,IERC1155TokenReceiver,MinConf {
         return arr;
     }
     
-    function findCarId(uint256 carId) public view returns(uint){
+    function findCarId(uint256 carId,uint256 len) public view returns(uint){
         uint256 ratio = uint256(keccak256(abi.encodePacked(carId, now)));
-        return ratio%18;
+        return ratio%len;
     }
     
     function getRecord(uint256 _version,address userAddress) external view returns(bool drawStatus,uint256 digGross,bool lastStraw,uint8 ranking){
@@ -430,6 +470,7 @@ contract Mining is Ownable,IERC1155TokenReceiver,MinConf {
     
     
     function onERC1155Received(address _operator, address _from, uint256 _id, uint256 _value, bytes calldata _data) external returns(bytes4) {
+        require(address(ERC1155)==_operator,"not allowed");
         uint256[] memory _values = new uint256[](1);
         uint256[] memory _ids = new uint256[](1);
         _ids[0] = _id;
@@ -440,6 +481,7 @@ contract Mining is Ownable,IERC1155TokenReceiver,MinConf {
     }
 
     function onERC1155BatchReceived(address _operator, address _from, uint256[] calldata _ids, uint256[] calldata _values, bytes calldata _data) external returns(bytes4) {
+        require(address(ERC1155)==_operator,"not allowed");
         require(_operator==_from,"not allowed");
         mining(_from,_ids,_values);
         

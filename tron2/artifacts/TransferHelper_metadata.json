@@ -14,7 +14,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"localhost/tron2/Tron2.sol": "SafeMath"
+			"localhost/tron2/Tron2.sol": "TransferHelper"
 		},
 		"evmVersion": "istanbul",
 		"libraries": {},

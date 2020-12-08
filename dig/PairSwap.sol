@@ -30,11 +30,9 @@ contract PairSwap is Ownable{
         _;
     }
     
-    function getPairAmount() external permit returns(uint256 ethAmoun,uint256 tokenAmount){
+    function getPairAmount() external view returns(uint256 ethAmoun,uint256 tokenAmount){
         ethAmoun = 10000 wei;
         tokenAmount = 20000 wei;
-        msg.sender.transfer(ethAmoun);
-        ERC20Token.safeTransfer(msg.sender,tokenAmount);
         return (ethAmoun,tokenAmount);
     }
 }

@@ -1,6 +1,6 @@
 {
 	"compiler": {
-		"version": "0.5.17+commit.d19bba13"
+		"version": "0.5.15+commit.6a57276f"
 	},
 	"language": "Solidity",
 	"output": {
@@ -33,10 +33,10 @@
 	},
 	"sources": {
 		"localhost/tron2/Tron2.sol": {
-			"keccak256": "0x581d6143b59e701734db951f2c1c7d2b999e085cdc09d43aecd84d52b9d3b03d",
+			"keccak256": "0xf39f3ed7a44149974624031d6b7a2187097b70fa372d7ecf1740d9220806c094",
 			"urls": [
-				"bzz-raw://84e9f3b1e37a159752b277f4140289ff309f413754900b4682d98d6d19dd3aab",
-				"dweb:/ipfs/QmXcXWStLE9XcjwH8RrNS8YzJ7ujGXKTsGdgtcMUKfAa1b"
+				"bzz-raw://a669b4d6f31d463e8b9e98fd912d72600271f39ecbdf61e479c99559fb997e54",
+				"dweb:/ipfs/QmNwAVRNT4hSFJk9Cc9gJyQ2DDvTehA1A7kWT6RojJs8DT"
 			]
 		}
 	},

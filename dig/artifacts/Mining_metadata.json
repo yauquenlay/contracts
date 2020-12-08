@@ -1,6 +1,6 @@
 {
 	"compiler": {
-		"version": "0.5.17+commit.d19bba13"
+		"version": "0.5.15+commit.6a57276f"
 	},
 	"language": "Solidity",
 	"output": {
@@ -135,6 +135,27 @@
 						"type": "uint256"
 					}
 				],
+				"name": "OUT_RATE",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"constant": true,
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
 				"name": "RANKING_AWARD_PERCENT",
 				"outputs": [
 					{
@@ -155,6 +176,31 @@
 					{
 						"internalType": "uint256",
 						"name": "",
+						"type": "uint256"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"constant": true,
+				"inputs": [],
+				"name": "avi",
+				"outputs": [
+					{
+						"internalType": "uint256[18]",
+						"name": "_carIds",
+						"type": "uint256[18]"
+					},
+					{
+						"internalType": "uint256",
+						"name": "len",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "erc1155Amount",
 						"type": "uint256"
 					}
 				],
@@ -230,6 +276,11 @@
 					{
 						"internalType": "uint256",
 						"name": "carId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "len",
 						"type": "uint256"
 					}
 				],
@@ -927,10 +978,10 @@
 			]
 		},
 		"localhost/dig/Mining.sol": {
-			"keccak256": "0x16f6a01a0894631351adff7f8691e7c8b08bff1e434da1def00f0266faa811c3",
+			"keccak256": "0x0d5827ac30df017a1d1cec522a2c0173202b4322e6a0881624c08fb888ede948",
 			"urls": [
-				"bzz-raw://c8f38f83295151f8f2ef3b62d4f8360dafb238a64e867598f1af70d2e45dc204",
-				"dweb:/ipfs/QmNxu9jrBj7NsdGTgde9LkZk4669GwhGm4fxucCFPVU4rW"
+				"bzz-raw://ce6d8153da3110ab68bbc7096e4990a93176ce47a9a9ba5aa667a011bab756a8",
+				"dweb:/ipfs/QmRKxKFWcDA6BiZ4q6H3uqYAJXf6KH4CB8m2CzshxwP6qQ"
 			]
 		},
 		"localhost/dig/Ownable.sol": {
