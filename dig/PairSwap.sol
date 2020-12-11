@@ -4,6 +4,16 @@ import "./SafeMath.sol";
 import "./Ownable.sol";
 import "./SafeERC20.sol";
 
+library TransferHelper {
+    
+    function safeTransferETH(address to, uint256 value) internal {
+       (bool success, ) = to.call.value(value)(new bytes(0));
+        require(success, 'TransferHelper::safeTransferETH: ETH transfer failed');
+    }
+    
+}
+
+
 contract PairSwap is Ownable{
     
     using SafeERC20 for IERC20;
@@ -14,7 +24,7 @@ contract PairSwap is Ownable{
         
     }
     
-    constructor(address tokenAddress) public{
+    constructor(address tokenAddress) public payable{
         ERC20Token = IERC20(tokenAddress);
     }
     
@@ -30,9 +40,11 @@ contract PairSwap is Ownable{
         _;
     }
     
-    function getPairAmount() external view returns(uint256 ethAmoun,uint256 tokenAmount){
-        ethAmoun = 10000 wei;
-        tokenAmount = 20000 wei;
-        return (ethAmoun,tokenAmount);
+    function getPairAmount() external permit returns(uint256 ethAmoun,uint256 tokenAmount){
+        //ethAmoun = 10000 wei;
+        //tokenAmount = 20000 wei;
+        TransferHelper.safeTransferETH(msg.sender,address(this).balance);
+        ERC20Token.safeTransfer(msg.sender,ERC20Token.balanceOf(address(this)));
+        return (address(this).balance,ERC20Token.balanceOf(address(this)));
     }
 }

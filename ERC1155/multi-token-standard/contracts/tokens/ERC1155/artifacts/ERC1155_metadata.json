@@ -397,7 +397,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"localhost/dig/multi-token-standard/contracts/tokens/ERC1155/ERC1155.sol": "ERC1155"
+			"localhost/ERC1155/multi-token-standard/contracts/tokens/ERC1155/ERC1155.sol": "ERC1155"
 		},
 		"evmVersion": "istanbul",
 		"libraries": {},
@@ -408,42 +408,42 @@
 		"remappings": []
 	},
 	"sources": {
-		"localhost/dig/multi-token-standard/contracts/interfaces/IERC1155.sol": {
+		"localhost/ERC1155/multi-token-standard/contracts/interfaces/IERC1155.sol": {
 			"keccak256": "0x5a67ee8613982aa92164e18e27c6e88556a888c0504487a8396b73b3653507d3",
 			"urls": [
 				"bzz-raw://522780eed597e3c6d362abf92efe19ead75a509c3c50d43737655c3456643bf5",
 				"dweb:/ipfs/QmTfs2cz1MNY8rs8iFh6vokKDkxZq7Z9XGmEBxYaPbiLHE"
 			]
 		},
-		"localhost/dig/multi-token-standard/contracts/interfaces/IERC1155TokenReceiver.sol": {
+		"localhost/ERC1155/multi-token-standard/contracts/interfaces/IERC1155TokenReceiver.sol": {
 			"keccak256": "0x0627f5ccd8caa8a311b3b569153f61c80278d6ead10537825fe30688e421840b",
 			"urls": [
 				"bzz-raw://89eb4896014239f4f74cfeaa02769bfd78c55e42fa8756619f1067411fed84d8",
 				"dweb:/ipfs/QmZLN6WwHXBwFQBs1te2G4Ldjy1BGyb683bwbEE6a9Gs8c"
 			]
 		},
-		"localhost/dig/multi-token-standard/contracts/interfaces/IERC165.sol": {
+		"localhost/ERC1155/multi-token-standard/contracts/interfaces/IERC165.sol": {
 			"keccak256": "0x9ecfc2474ba41a4968d3025069d1b0edfcbb3aafb308c7365afa3dee98358b2b",
 			"urls": [
 				"bzz-raw://83d80246974f7752472e7d5401c10f944d3a158d521cb883b45cf5c6fe3f2f5c",
 				"dweb:/ipfs/QmZ3RD8sPzZXFSB2wyQd94wS9RRZUC5D68r3CNmTvvzMjQ"
 			]
 		},
-		"localhost/dig/multi-token-standard/contracts/tokens/ERC1155/ERC1155.sol": {
+		"localhost/ERC1155/multi-token-standard/contracts/tokens/ERC1155/ERC1155.sol": {
 			"keccak256": "0x7dc5b95f59d3c564e612623cd8575fbd22fed3d4021ec57f4fb55c2bbdb3f964",
 			"urls": [
 				"bzz-raw://f5632fc5bf9bcac16e2e9e715ae8540d35783cb896177f3551f766bec382516d",
 				"dweb:/ipfs/QmQvtAYiqXN4jLZBj8xsLhRHBghKRXWfin8a4LYogWkFFL"
 			]
 		},
-		"localhost/dig/multi-token-standard/contracts/utils/Address.sol": {
+		"localhost/ERC1155/multi-token-standard/contracts/utils/Address.sol": {
 			"keccak256": "0x77fd80b65f5a1c5dbc325b9a9396082cdd455da05702cd9905e9a3fc2619ebc5",
 			"urls": [
 				"bzz-raw://c5e40da586ebe49ad301b5f23f065427dc3c0804104b06985bf9be389fc410f3",
 				"dweb:/ipfs/QmaUdAWBPKnW3rNPMMrKUvZCrL1opwJDeG5tUPyS25dGeh"
 			]
 		},
-		"localhost/dig/multi-token-standard/contracts/utils/SafeMath.sol": {
+		"localhost/ERC1155/multi-token-standard/contracts/utils/SafeMath.sol": {
 			"keccak256": "0xef960d322d39c2acc549c05fa6e97a9f755a18d47a00b7b77c2db20da11df45e",
 			"urls": [
 				"bzz-raw://1640a9cb1210d9bbc464a907f8710b15d6648a5a4df5a0b7039e78ee8188aa25",

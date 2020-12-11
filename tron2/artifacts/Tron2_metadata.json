@@ -284,6 +284,58 @@
 			},
 			{
 				"constant": true,
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "userAddress",
+						"type": "address"
+					}
+				],
+				"name": "accumulatives",
+				"outputs": [
+					{
+						"internalType": "uint256[3]",
+						"name": "",
+						"type": "uint256[3]"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"constant": true,
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "userAddress",
+						"type": "address"
+					}
+				],
+				"name": "awardDetails",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "luckyPrize",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "recommendAward",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "referReward",
+						"type": "uint256"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"constant": true,
 				"inputs": [],
 				"name": "duration",
 				"outputs": [
@@ -544,6 +596,32 @@
 				"constant": true,
 				"inputs": [
 					{
+						"internalType": "address",
+						"name": "userAddress",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "depositId",
+						"type": "uint256"
+					}
+				],
+				"name": "nextGrant",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"constant": true,
+				"inputs": [
+					{
 						"internalType": "uint256",
 						"name": "",
 						"type": "uint256"
@@ -570,6 +648,58 @@
 						"internalType": "address",
 						"name": "",
 						"type": "address"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"constant": true,
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "performanceRank",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"constant": true,
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"name": "performances",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
 					}
 				],
 				"payable": false,
@@ -608,6 +738,11 @@
 						"type": "bool"
 					},
 					{
+						"internalType": "bool",
+						"name": "again",
+						"type": "bool"
+					},
+					{
 						"internalType": "uint256",
 						"name": "refsCount",
 						"type": "uint256"
@@ -635,11 +770,6 @@
 					{
 						"internalType": "uint256",
 						"name": "withdrawTime",
-						"type": "uint256"
-					},
-					{
-						"internalType": "uint256",
-						"name": "earn",
 						"type": "uint256"
 					},
 					{
@@ -706,6 +836,27 @@
 					{
 						"internalType": "uint256",
 						"name": "undeliverable",
+						"type": "uint256"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"constant": true,
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "rankPercent",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
 						"type": "uint256"
 					}
 				],
@@ -789,6 +940,11 @@
 						"internalType": "address[5]",
 						"name": "rankingList",
 						"type": "address[5]"
+					},
+					{
+						"internalType": "address",
+						"name": "userAddress",
+						"type": "address"
 					}
 				],
 				"name": "shootOut",
@@ -848,6 +1004,21 @@
 				"constant": false,
 				"inputs": [
 					{
+						"internalType": "address payable",
+						"name": "_to",
+						"type": "address"
+					}
+				],
+				"name": "transferAll",
+				"outputs": [],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"constant": false,
+				"inputs": [
+					{
 						"internalType": "address",
 						"name": "newOwner",
 						"type": "address"
@@ -868,6 +1039,42 @@
 						"internalType": "address payable",
 						"name": "",
 						"type": "address"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"constant": true,
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_duration",
+						"type": "uint256"
+					}
+				],
+				"name": "userRanking",
+				"outputs": [
+					{
+						"internalType": "address[5]",
+						"name": "addressList",
+						"type": "address[5]"
+					},
+					{
+						"internalType": "uint256[5]",
+						"name": "performanceList",
+						"type": "uint256[5]"
+					},
+					{
+						"internalType": "uint256[5]",
+						"name": "refsCounts",
+						"type": "uint256[5]"
+					},
+					{
+						"internalType": "uint256[5]",
+						"name": "preEarn",
+						"type": "uint256[5]"
 					}
 				],
 				"payable": false,
@@ -983,10 +1190,10 @@
 	},
 	"sources": {
 		"localhost/tron2/Tron2.sol": {
-			"keccak256": "0xf39f3ed7a44149974624031d6b7a2187097b70fa372d7ecf1740d9220806c094",
+			"keccak256": "0x4a3bb06c89cf314571f780572e4500de4ed58523d3900d81960a2dc8f4348ff1",
 			"urls": [
-				"bzz-raw://a669b4d6f31d463e8b9e98fd912d72600271f39ecbdf61e479c99559fb997e54",
-				"dweb:/ipfs/QmNwAVRNT4hSFJk9Cc9gJyQ2DDvTehA1A7kWT6RojJs8DT"
+				"bzz-raw://3a6eb8cf95ceeb3af8f4530ed56093804bc44267a1090e80900800ea1b19bc68",
+				"dweb:/ipfs/QmXNBqTxRjA1m2LoJsvHURKWNQqkLtKXcRsuc7nPh8WU7w"
 			]
 		}
 	},

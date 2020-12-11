@@ -14,7 +14,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"localhost/dig/SafeMath.sol": "SafeMath"
+			"localhost/dig/ERC1155/ERC1155Tradable.sol": "SafeMath"
 		},
 		"evmVersion": "istanbul",
 		"libraries": {},
@@ -25,11 +25,11 @@
 		"remappings": []
 	},
 	"sources": {
-		"localhost/dig/SafeMath.sol": {
-			"keccak256": "0xd9d4b7c9aaff75b838816b3507614e037f890a6c927798f19aad99a9c07d4e9d",
+		"localhost/dig/ERC1155/ERC1155Tradable.sol": {
+			"keccak256": "0xd8b7a88cd16c7733f90d50820a58ae088d8b246c0597376fbd25824ac180fd32",
 			"urls": [
-				"bzz-raw://8ae33ec15991f24d831569ce06d76545ca58351791dab9e4174d93c9324e1bcc",
-				"dweb:/ipfs/QmVhfc17zRrYPD8D4W5dAePAZ3KXiHPvW6pUiBMFywsuCr"
+				"bzz-raw://0efc8bc5d3839948db85be3a9374da4bc47a0890f2776958dbcaed1b3594f4df",
+				"dweb:/ipfs/QmSmF2DsQRim64Tu3wxMzpPVZmDTSKTGtdCP3zwmcL8Edg"
 			]
 		}
 	},

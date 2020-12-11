@@ -4,28 +4,7 @@
 	},
 	"language": "Solidity",
 	"output": {
-		"abi": [
-			{
-				"constant": false,
-				"inputs": [],
-				"name": "getPairAmount",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "ethAmoun",
-						"type": "uint256"
-					},
-					{
-						"internalType": "uint256",
-						"name": "tokenAmount",
-						"type": "uint256"
-					}
-				],
-				"payable": false,
-				"stateMutability": "nonpayable",
-				"type": "function"
-			}
-		],
+		"abi": [],
 		"devdoc": {
 			"methods": {}
 		},
@@ -35,7 +14,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"localhost/dig/Mining.sol": "PairSwap"
+			"localhost/dig/PairSwap.sol": "TransferHelper"
 		},
 		"evmVersion": "istanbul",
 		"libraries": {},
@@ -53,20 +32,6 @@
 				"dweb:/ipfs/QmaWZUTKbGDvTUALkm7G7cr3XpCoAX1GkxwiTQaPuh3f2E"
 			]
 		},
-		"localhost/dig/IERC1155.sol": {
-			"keccak256": "0x5a67ee8613982aa92164e18e27c6e88556a888c0504487a8396b73b3653507d3",
-			"urls": [
-				"bzz-raw://522780eed597e3c6d362abf92efe19ead75a509c3c50d43737655c3456643bf5",
-				"dweb:/ipfs/QmTfs2cz1MNY8rs8iFh6vokKDkxZq7Z9XGmEBxYaPbiLHE"
-			]
-		},
-		"localhost/dig/IERC1155TokenReceiver.sol": {
-			"keccak256": "0x0627f5ccd8caa8a311b3b569153f61c80278d6ead10537825fe30688e421840b",
-			"urls": [
-				"bzz-raw://89eb4896014239f4f74cfeaa02769bfd78c55e42fa8756619f1067411fed84d8",
-				"dweb:/ipfs/QmZLN6WwHXBwFQBs1te2G4Ldjy1BGyb683bwbEE6a9Gs8c"
-			]
-		},
 		"localhost/dig/IERC20.sol": {
 			"keccak256": "0xa019c8a74e4fa151c664dbbb143b466d4978f722e64e747e433bd1039d752089",
 			"urls": [
@@ -74,18 +39,18 @@
 				"dweb:/ipfs/QmeqDwBgpnYeJQdKTykm6u2YqRGKEyfzj21PFCokeQg8SP"
 			]
 		},
-		"localhost/dig/Mining.sol": {
-			"keccak256": "0x861b4c663a54e74acc66c064cf7c5080be688fe88bf2078629989dd37405bde4",
-			"urls": [
-				"bzz-raw://e70f8087f60fff582ee5aa1c069d62a9a0bd9fc7cda2e66944e10a01357e9801",
-				"dweb:/ipfs/QmSmiKRgwWHnRkY2wrhoiXyREb5PpjhxweTx719Z4rddE2"
-			]
-		},
 		"localhost/dig/Ownable.sol": {
 			"keccak256": "0x36a5c49d4c6af221f303eb4ce63e47b35a79a2027a2e5aa2a666d2f334c12770",
 			"urls": [
 				"bzz-raw://1e73387d8c5aa54ec66d69fdc1b67ec83e471ef5240074d717ee33ec5bb1de20",
 				"dweb:/ipfs/QmQy9Xereah4Q4KBEzNXodQJfmUYoAy9pV2WzzUYveg6DN"
+			]
+		},
+		"localhost/dig/PairSwap.sol": {
+			"keccak256": "0xd0634ac44a67d6f0cd60ba10776ef8c37dc1cadc6a1361e2288bdbd9ca68c606",
+			"urls": [
+				"bzz-raw://10df0afdc2c0678e21a9a3919fb21959cd9276b00839e63523df0703252ad9e3",
+				"dweb:/ipfs/QmU3aQe41xxuDCkvkwWiNphh74irpuvTAEhAdT9m6TeBDi"
 			]
 		},
 		"localhost/dig/SafeERC20.sol": {

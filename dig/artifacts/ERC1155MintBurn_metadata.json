@@ -110,7 +110,7 @@
 					{
 						"indexed": false,
 						"internalType": "string",
-						"name": "_amount",
+						"name": "_uri",
 						"type": "string"
 					},
 					{
@@ -290,6 +290,27 @@
 				"payable": false,
 				"stateMutability": "nonpayable",
 				"type": "function"
+			},
+			{
+				"constant": true,
+				"inputs": [
+					{
+						"internalType": "bytes4",
+						"name": "_interfaceID",
+						"type": "bytes4"
+					}
+				],
+				"name": "supportsInterface",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
 			}
 		],
 		"devdoc": {
@@ -316,7 +337,6 @@
 					"return": "True if the operator is approved, false if not"
 				},
 				"safeBatchTransferFrom(address,address,uint256[],uint256[],bytes)": {
-					"details": "MUST emit TransferBatch event on success Caller must be approved to manage the _from account's tokens (see isApprovedForAll) MUST throw if `_to` is the zero address MUST throw if length of `_ids` is not the same as length of `_amounts` MUST throw if any of the balance of sender for token `_ids` is lower than the respective `_amounts` sent MUST throw on any other error When transfer is complete, this function MUST check if `_to` is a smart contract (code size > 0). If so, it MUST call `onERC1155BatchReceived` on `_to` and revert if the return amount is not `bytes4(keccak256(\"onERC1155BatchReceived(address,address,uint256[],uint256[],bytes)\"))` Transfers and events MUST occur in the array order they were submitted (_ids[0] before _ids[1], etc)",
 					"params": {
 						"_amounts": "Transfer amounts per token type",
 						"_data": "Additional data with no specified format, sent in call to `_to`",
@@ -326,7 +346,6 @@
 					}
 				},
 				"safeTransferFrom(address,address,uint256,uint256,bytes)": {
-					"details": "MUST emit TransferSingle event on success Caller must be approved to manage the _from account's tokens (see isApprovedForAll) MUST throw if `_to` is the zero address MUST throw if balance of sender for token `_id` is lower than the `_amount` sent MUST throw on any other error When transfer is complete, this function MUST check if `_to` is a smart contract (code size > 0). If so, it MUST call `onERC1155Received` on `_to` and revert if the return amount is not `bytes4(keccak256(\"onERC1155Received(address,address,uint256,uint256,bytes)\"))`",
 					"params": {
 						"_amount": "Transfered amount",
 						"_data": "Additional data with no specified format, sent in call to `_to`",
@@ -336,11 +355,16 @@
 					}
 				},
 				"setApprovalForAll(address,bool)": {
-					"details": "MUST emit the ApprovalForAll event on success",
 					"params": {
 						"_approved": "True if the operator is approved, false to revoke approval",
 						"_operator": "Address to add to the set of authorized operators"
 					}
+				},
+				"supportsInterface(bytes4)": {
+					"params": {
+						"_interfaceID": "The interface identifier, as specified in ERC-165"
+					},
+					"return": "`true` if the contract implements `_interfaceID` and"
 				}
 			}
 		},
@@ -359,17 +383,20 @@
 					"notice": "Send multiple types of Tokens from the _from address to the _to address (with safety call)"
 				},
 				"safeTransferFrom(address,address,uint256,uint256,bytes)": {
-					"notice": "Transfers amount of an _id from the _from address to the _to address specified"
+					"notice": "Transfers amount amount of an _id from the _from address to the _to address specified"
 				},
 				"setApprovalForAll(address,bool)": {
 					"notice": "Enable or disable approval for a third party (\"operator\") to manage all of caller's tokens"
+				},
+				"supportsInterface(bytes4)": {
+					"notice": "Query if a contract implements an interface"
 				}
 			}
 		}
 	},
 	"settings": {
 		"compilationTarget": {
-			"localhost/dig/IERC1155.sol": "IERC1155"
+			"localhost/dig/ERC1155/ERC1155Tradable.sol": "ERC1155MintBurn"
 		},
 		"evmVersion": "istanbul",
 		"libraries": {},
@@ -380,11 +407,11 @@
 		"remappings": []
 	},
 	"sources": {
-		"localhost/dig/IERC1155.sol": {
-			"keccak256": "0x5a67ee8613982aa92164e18e27c6e88556a888c0504487a8396b73b3653507d3",
+		"localhost/dig/ERC1155/ERC1155Tradable.sol": {
+			"keccak256": "0xd8b7a88cd16c7733f90d50820a58ae088d8b246c0597376fbd25824ac180fd32",
 			"urls": [
-				"bzz-raw://522780eed597e3c6d362abf92efe19ead75a509c3c50d43737655c3456643bf5",
-				"dweb:/ipfs/QmTfs2cz1MNY8rs8iFh6vokKDkxZq7Z9XGmEBxYaPbiLHE"
+				"bzz-raw://0efc8bc5d3839948db85be3a9374da4bc47a0890f2776958dbcaed1b3594f4df",
+				"dweb:/ipfs/QmSmF2DsQRim64Tu3wxMzpPVZmDTSKTGtdCP3zwmcL8Edg"
 			]
 		}
 	},

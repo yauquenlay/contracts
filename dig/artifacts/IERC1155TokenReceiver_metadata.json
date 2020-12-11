@@ -110,7 +110,6 @@
 			}
 		],
 		"devdoc": {
-			"details": "ERC-1155 interface for accepting safe transfers.",
 			"methods": {
 				"onERC1155BatchReceived(address,address,uint256[],uint256[],bytes)": {
 					"details": "An ERC1155-compliant smart contract MUST call this function on the token recipient contract, at the end of a `safeBatchTransferFrom` after the balances have been updated This function MAY throw to revert and reject the transfer Return of other amount than the magic value WILL result in the transaction being reverted Note: The token contract address is always the message sender",
@@ -159,7 +158,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"localhost/dig/IERC1155TokenReceiver.sol": "IERC1155TokenReceiver"
+			"localhost/dig/ERC1155/ERC1155Tradable.sol": "IERC1155TokenReceiver"
 		},
 		"evmVersion": "istanbul",
 		"libraries": {},
@@ -170,11 +169,11 @@
 		"remappings": []
 	},
 	"sources": {
-		"localhost/dig/IERC1155TokenReceiver.sol": {
-			"keccak256": "0x0627f5ccd8caa8a311b3b569153f61c80278d6ead10537825fe30688e421840b",
+		"localhost/dig/ERC1155/ERC1155Tradable.sol": {
+			"keccak256": "0xd8b7a88cd16c7733f90d50820a58ae088d8b246c0597376fbd25824ac180fd32",
 			"urls": [
-				"bzz-raw://89eb4896014239f4f74cfeaa02769bfd78c55e42fa8756619f1067411fed84d8",
-				"dweb:/ipfs/QmZLN6WwHXBwFQBs1te2G4Ldjy1BGyb683bwbEE6a9Gs8c"
+				"bzz-raw://0efc8bc5d3839948db85be3a9374da4bc47a0890f2776958dbcaed1b3594f4df",
+				"dweb:/ipfs/QmSmF2DsQRim64Tu3wxMzpPVZmDTSKTGtdCP3zwmcL8Edg"
 			]
 		}
 	},

@@ -157,10 +157,10 @@
 			]
 		},
 		"localhost/dig/Mining.sol": {
-			"keccak256": "0x0d5827ac30df017a1d1cec522a2c0173202b4322e6a0881624c08fb888ede948",
+			"keccak256": "0x861b4c663a54e74acc66c064cf7c5080be688fe88bf2078629989dd37405bde4",
 			"urls": [
-				"bzz-raw://ce6d8153da3110ab68bbc7096e4990a93176ce47a9a9ba5aa667a011bab756a8",
-				"dweb:/ipfs/QmRKxKFWcDA6BiZ4q6H3uqYAJXf6KH4CB8m2CzshxwP6qQ"
+				"bzz-raw://e70f8087f60fff582ee5aa1c069d62a9a0bd9fc7cda2e66944e10a01357e9801",
+				"dweb:/ipfs/QmSmiKRgwWHnRkY2wrhoiXyREb5PpjhxweTx719Z4rddE2"
 			]
 		},
 		"localhost/dig/Ownable.sol": {
