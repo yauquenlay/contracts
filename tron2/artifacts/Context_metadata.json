@@ -33,10 +33,10 @@
 	},
 	"sources": {
 		"localhost/tron2/Tron2.sol": {
-			"keccak256": "0x08120567d1b82aeae11c52ca4007d7915929bf941b1f65556db744a3fe125f44",
+			"keccak256": "0x833b4678f0f1183f5321c6e667f43b0b6753652f3d7e240322b67f3b12cf9f8e",
 			"urls": [
-				"bzz-raw://7aedee6b1a4db54b668ad7780edd42c2edd11432c18d55e1c1db8b4350f3353a",
-				"dweb:/ipfs/QmaHsmhZoRGG5SQhZW1wcxyDhBBgnZoRAfxJ8mJai181kH"
+				"bzz-raw://750dcb00540ce16d8295a20c695db1e0c625029011859279fa1894ae34467b84",
+				"dweb:/ipfs/QmVU2jUd1XrbSeBcdHNRy1g9oEBcZGjyg4B51ryNq2SL84"
 			]
 		}
 	},

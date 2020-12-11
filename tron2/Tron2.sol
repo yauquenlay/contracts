@@ -869,7 +869,12 @@ contract Tron2 is Ownable,Tron2Config{
         stats[9] = player.playerDepositAmount;
         stats[10] = player.playerWithdrawAmount;
         stats[11] = extractable(_player);
-        stats[12] = player.deposits[0].amount;
+        if(player.deposits.length==0){
+           stats[12] = 0;
+        }else{
+           stats[12] = player.deposits[0].amount; 
+        }
+        
         stats[13] = player.withdrawTime;
     }
     
