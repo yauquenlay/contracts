@@ -741,14 +741,14 @@ contract Tron2 is Ownable,Tron2Config{
                 if(stop){
                     return 0;
                 }else{
-                    return deposit.amount.mul(earn_percent[2]).div(100);
+                    return deposit.amount.mul(earn_percent[modelType]).div(100);
                 }
             }else{
                 return 0;
             }
             
         }else{
-            return deposit.amount.mul(earn_percent[2]).div(100).mul(_duration).sub(deposit.withdrawn);
+            return deposit.amount.mul(earn_percent[modelType]).div(100).mul(_duration).sub(deposit.withdrawn);
         }
     }
     
