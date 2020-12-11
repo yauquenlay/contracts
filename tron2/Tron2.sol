@@ -185,7 +185,7 @@ contract Tron2Config{
 
     uint256[3] public overLimit = [100,50,100];
     
-    uint256[3] public earn_percent = [1,1,25];
+    uint256[3] public earn_percent = [1,1,20];
     
     uint256[3] public luckyPercentLimit = [0,50,100];
     
