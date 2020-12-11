@@ -819,9 +819,23 @@ contract Tron2 is Ownable,Tron2Config{
         }
         
     }
-
+    
+    function inRank(address userAddress) private view returns(uint256){
+        address[5] memory ranking = sortRanking(timePointer);
+        for(uint8 i = 0;i<5;i++){
+            if(ranking[i]==userAddress){
+                uint256 credit = recommendPool.getCredit();
+                return credit.mul(rankPercent[i]).div(100);
+            }
+        }
+    }
+ 
 
     function awardDetails(address userAddress) external view returns(uint256 luckyPrize,uint256 recommendAward,uint256 referReward){
+        
+       if(timePointer<duration()){
+            recommendAward = recommendAward.add(inRank(userAddress));
+        }
         
         luckyPrize = prizePool.prizes(userAddress);
         recommendAward = recommendPool.allowances(userAddress);
@@ -830,12 +844,14 @@ contract Tron2 is Ownable,Tron2Config{
     }
     
     	//The entire network information
-    function getGlobalStats() external view returns (uint256[5] memory stats) {
+    function getGlobalStats() external view returns (uint256[6] memory stats) {
         stats[0] = totalDepositAmount;
         stats[1] = address(this).balance;
         stats[2] = prizePool.getCredit();
         stats[3] = recommendPool.getCredit();
         stats[4] = playersCount;
+        stats[5] = START_TIME.add(duration().add(1).mul(ONE_DAY));
+        
     
     }
     
@@ -853,6 +869,8 @@ contract Tron2 is Ownable,Tron2Config{
         stats[9] = player.playerDepositAmount;
         stats[10] = player.playerWithdrawAmount;
         stats[11] = extractable(_player);
+        stats[12] = player.deposits[0].amount;
+        stats[13] = player.withdrawTime;
     }
     
     //paging
