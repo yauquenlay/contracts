@@ -137,13 +137,13 @@ contract PrizePool is Ownable{
     
     address payable contractAllow;
     
-    uint256 public credit;
+    uint256 public debt;
     
+    event Deposit(address indexed userAddress,uint256 amount);
     
+    event AllotPrize(address indexed userAddress,uint256 amount);
     
-    
-    
-    
+    event Withdraw(address indexed userAddress,uint256 amount);
     
     
     
@@ -191,29 +191,31 @@ contract PrizePool is Ownable{
     
     function deposit() public payable permission {
         require(msg.value>0,"It's not allowed to be zero");
-        credit = credit.add(msg.value);
+        emit Deposit(tx.origin,msg.value);
     }
     
     function allotPrize(address lucky, uint256 amount) external onlyContractAllow permission  {
         require(lucky != address(0), "zero address");
         require(address(this).balance>=amount,"not enought");
         prizes[lucky] = prizes[lucky].add(amount);
-        credit = credit.sub(amount);
+        debt = debt.add(amount);
+        emit Deposit(lucky,amount);
     }
     
     function clearPrize(address lucky) external onlyContractAllow {
         prizes[lucky] = 0;
     }
     
-    function withdraw(address payable lucky,uint256 amount) external permission returns (uint256) {
+    function withdraw(address payable lucky,uint256 amount) external onlyContractAllow permission returns (uint256) {
         require(prizes[lucky]>=amount,"Lines of 0");
         //prizes[lucky] = prizes[lucky].sub(amount);
+        debt = debt.sub(prizes[lucky]);
         prizes[lucky] = 0;
         lucky.transfer(amount);
     }
     
-    function getCredit() public view returns(uint256){
-        return credit;
+    function getBalance() public view returns(uint256){
+        return address(this).balance.sub(debt);
     }
     
 }

@@ -46,7 +46,7 @@
 		"methodIdentifiers": {
 			"allotBonus(address[5],uint256)": "db1f9aeb",
 			"allowances(address)": "2b603c71",
-			"getCredit()": "59296e7b",
+			"getBalance()": "12065fe0",
 			"withdraw(address,uint256)": "f3fef3a3"
 		}
 	},
@@ -95,7 +95,7 @@
 		{
 			"constant": true,
 			"inputs": [],
-			"name": "getCredit",
+			"name": "getBalance",
 			"outputs": [
 				{
 					"internalType": "uint256",

@@ -1,30 +1,24 @@
 {
 	"compiler": {
-		"version": "0.6.12+commit.27d51765"
+		"version": "0.5.15+commit.6a57276f"
 	},
 	"language": "Solidity",
 	"output": {
 		"abi": [],
 		"devdoc": {
-			"kind": "dev",
-			"methods": {},
-			"version": 1
+			"details": "Collection of functions related to the address type",
+			"methods": {}
 		},
 		"userdoc": {
-			"kind": "user",
-			"methods": {},
-			"version": 1
+			"methods": {}
 		}
 	},
 	"settings": {
 		"compilationTarget": {
-			"localhost/tron2/Tron2.sol": "Address"
+			"browser/PZSSub.sol": "Address"
 		},
 		"evmVersion": "istanbul",
 		"libraries": {},
-		"metadata": {
-			"bytecodeHash": "ipfs"
-		},
 		"optimizer": {
 			"enabled": false,
 			"runs": 200
@@ -32,11 +26,11 @@
 		"remappings": []
 	},
 	"sources": {
-		"localhost/tron2/Tron2.sol": {
-			"keccak256": "0x0eb2abafa2fbc4c47db2ba47baefe3265b6e91bbffa3db13e619b3cdbd9a7ed2",
+		"browser/PZSSub.sol": {
+			"keccak256": "0xcc6b9b43732b7bda21a56c6d65329de91a41aa1be31b4b7da8e2dbe3b01f17e7",
 			"urls": [
-				"bzz-raw://42822cecc5ed327b9852b9eacedf58dbda53ee88ab1c10d53b31aa3bf663e3bd",
-				"dweb:/ipfs/QmRPBLV2TE3dL4nfJNqWLxJESgnnZeeV7J9iR1z1a2kPk3"
+				"bzz-raw://1928cc11ddab6d72ea56c27dd270e1d71bacc906bbd986f51e46ae3356621440",
+				"dweb:/ipfs/QmWD16zXaYHGGZYD5DFcdAJQuf9V8PC9cSDJsEA9x58d5j"
 			]
 		}
 	},

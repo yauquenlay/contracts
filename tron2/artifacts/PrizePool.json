@@ -46,7 +46,7 @@
 		"methodIdentifiers": {
 			"allotPrize(address,uint256)": "f09e9b22",
 			"clearPrize(address)": "27a22eb9",
-			"getCredit()": "59296e7b",
+			"getBalance()": "12065fe0",
 			"permissions(address)": "01e88208",
 			"prizes(address)": "b35d11bf",
 			"withdraw(address,uint256)": "f3fef3a3"
@@ -91,7 +91,7 @@
 		{
 			"constant": true,
 			"inputs": [],
-			"name": "getCredit",
+			"name": "getBalance",
 			"outputs": [
 				{
 					"internalType": "uint256",

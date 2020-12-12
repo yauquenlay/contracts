@@ -1,6 +1,6 @@
 {
 	"compiler": {
-		"version": "0.5.17+commit.d19bba13"
+		"version": "0.5.15+commit.6a57276f"
 	},
 	"language": "Solidity",
 	"output": {
@@ -49,7 +49,7 @@
 			{
 				"constant": true,
 				"inputs": [],
-				"name": "getCredit",
+				"name": "getBalance",
 				"outputs": [
 					{
 						"internalType": "uint256",
@@ -103,10 +103,10 @@
 	},
 	"sources": {
 		"localhost/tron2/Tron2.sol": {
-			"keccak256": "0x833b4678f0f1183f5321c6e667f43b0b6753652f3d7e240322b67f3b12cf9f8e",
+			"keccak256": "0x3a4a6a93469adb39edc91bfa67bb6a3bd8e6f87588c7eca39628512811c0c73b",
 			"urls": [
-				"bzz-raw://750dcb00540ce16d8295a20c695db1e0c625029011859279fa1894ae34467b84",
-				"dweb:/ipfs/QmVU2jUd1XrbSeBcdHNRy1g9oEBcZGjyg4B51ryNq2SL84"
+				"bzz-raw://de500183b877bdd4988fbc23eae0a67bd861d92c7890398d220e6f4b50483308",
+				"dweb:/ipfs/QmfJfH3vtWRouorpThkhgGL9JosRpVu6QgnjREs5VNFM1A"
 			]
 		}
 	},

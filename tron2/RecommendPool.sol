@@ -139,15 +139,15 @@ contract RecommendPool is Ownable{
     
     address payable contractAllow;
     
-    uint256 public credit;
+    uint256 public debt;
     
     uint256[5] public rankPercent = [5,4,3,2,1];
     
+    event Deposit(address indexed userAddress,uint256 amount);
     
+    event AllotBonus(address indexed userAddress, uint256 timePointer,uint256 bonus);
     
-    
-    
-    
+    event Withdraw(address indexed userAddress,uint256 amount);
     
     
     
@@ -192,7 +192,8 @@ contract RecommendPool is Ownable{
     
     function deposit() public payable permission {
         require(msg.value>0,"It's not allowed to be zero");
-        credit = credit.add(msg.value);
+        
+        emit Deposit(tx.origin,msg.value);
     }
     
     function allotBonus(address[5] calldata ranking,uint256 timePointer) external onlyContractAllow permission returns (uint256) {
@@ -204,29 +205,36 @@ contract RecommendPool is Ownable{
             for(uint8 i= 0;i<5;i++){
                 
                 if(ranking[i]!=address(0)){
-                    uint256 refBonus = credit.mul(rankPercent[i]).div(100);
+                    uint256 refBonus = getBalance().mul(rankPercent[i]).div(100);
                 
                     allowances[ranking[i]] = allowances[ranking[i]].add(refBonus);
                     bonus = bonus.add(refBonus);
+                    
+                    emit AllotBonus(ranking[i],timePointer,refBonus);
                 }
                 
             }
-            credit = credit.sub(bonus);
-            
+            debt = debt.add(bonus);
             settleStatus[timePointer] = true;
+            
+            
+            
             return bonus;
         }
         
     }
     
-    function withdraw(address payable ref,uint256 amount) public permission{
+    function withdraw(address payable ref,uint256 amount) public onlyContractAllow permission{
        require(allowances[ref]>=amount,"Lines of 0");
        allowances[ref] = allowances[ref].sub(amount);
+       debt = debt.sub(amount);
        ref.transfer(amount);
+       emit Withdraw(ref,amount);
     }
     
-    function getCredit() public view returns(uint256){
-        return credit;
+    
+    function getBalance() public view returns(uint256){
+        return address(this).balance.sub(debt);
     }
   
 }
