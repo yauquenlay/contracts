@@ -6,6 +6,74 @@
 	"output": {
 		"abi": [
 			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "userAddress",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "timePointer",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "bonus",
+						"type": "uint256"
+					}
+				],
+				"name": "AllotBonus",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "userAddress",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					}
+				],
+				"name": "Deposit",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "userAddress",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					}
+				],
+				"name": "Withdraw",
+				"type": "event"
+			},
+			{
+				"payable": true,
+				"stateMutability": "payable",
+				"type": "fallback"
+			},
+			{
 				"constant": false,
 				"inputs": [
 					{
@@ -20,7 +88,13 @@
 					}
 				],
 				"name": "allotBonus",
-				"outputs": [],
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
 				"payable": false,
 				"stateMutability": "nonpayable",
 				"type": "function"
@@ -30,11 +104,11 @@
 				"inputs": [
 					{
 						"internalType": "address",
-						"name": "",
+						"name": "userAddress",
 						"type": "address"
 					}
 				],
-				"name": "allowances",
+				"name": "availableBalance",
 				"outputs": [
 					{
 						"internalType": "uint256",
@@ -48,13 +122,128 @@
 			},
 			{
 				"constant": true,
-				"inputs": [],
-				"name": "getBalance",
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"name": "balanceOf",
 				"outputs": [
 					{
 						"internalType": "uint256",
 						"name": "",
 						"type": "uint256"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"constant": true,
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"name": "debts",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"constant": false,
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "userAddress",
+						"type": "address"
+					}
+				],
+				"name": "deposit",
+				"outputs": [],
+				"payable": true,
+				"stateMutability": "payable",
+				"type": "function"
+			},
+			{
+				"constant": true,
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"name": "prizes",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"constant": true,
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "rankPercent",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"constant": true,
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"name": "settleStatus",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
 					}
 				],
 				"payable": false,
@@ -76,7 +265,13 @@
 					}
 				],
 				"name": "withdraw",
-				"outputs": [],
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
 				"payable": false,
 				"stateMutability": "nonpayable",
 				"type": "function"
@@ -91,7 +286,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"localhost/tron2/Tron2.sol": "RecommendPool"
+			"localhost/tron2/RecommendPool.sol": "RecommendPool"
 		},
 		"evmVersion": "istanbul",
 		"libraries": {},
@@ -102,11 +297,11 @@
 		"remappings": []
 	},
 	"sources": {
-		"localhost/tron2/Tron2.sol": {
-			"keccak256": "0x3a4a6a93469adb39edc91bfa67bb6a3bd8e6f87588c7eca39628512811c0c73b",
+		"localhost/tron2/RecommendPool.sol": {
+			"keccak256": "0x6c34987d3d59f6a1b37a876a8fc4cd1623a243fa4441d39c16ea47ef14af08f5",
 			"urls": [
-				"bzz-raw://de500183b877bdd4988fbc23eae0a67bd861d92c7890398d220e6f4b50483308",
-				"dweb:/ipfs/QmfJfH3vtWRouorpThkhgGL9JosRpVu6QgnjREs5VNFM1A"
+				"bzz-raw://3eb0a29a62d44e8a6f48515bcad7e1865a1e672c174db98930e47b898c7f94dc",
+				"dweb:/ipfs/QmSJ8ATr9kiS3P9YNDvJrmTmU42gPHYTXSDAR9cBQ3r6vR"
 			]
 		}
 	},

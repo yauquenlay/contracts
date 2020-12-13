@@ -72,6 +72,8 @@ contract Mining is Ownable,IERC1155TokenReceiver,MinConf {
         uint256 complete;
         //实际挖矿量
         uint256 actual;
+        
+        address lastStraw;
     }
     
     struct Record{
@@ -83,6 +85,8 @@ contract Mining is Ownable,IERC1155TokenReceiver,MinConf {
         bool lastStraw;
         //排名
         uint8 ranking;
+        
+        mapping(uint256=>uint256) disCars;
     }
     
     
@@ -101,7 +105,7 @@ contract Mining is Ownable,IERC1155TokenReceiver,MinConf {
     //mapping(uint256=>uint256) totalStake;
     mapping(uint256=>mapping(address=>Record)) public records;
     mapping(uint256=> address[10]) public sorts;
-    
+
     mapping(uint256=>Pair) public history;
     
     mapping(address=>User) public users;
@@ -305,12 +309,14 @@ contract Mining is Ownable,IERC1155TokenReceiver,MinConf {
         
         uint256 carFertility;
         uint256 carCarry;
-        
+        Record storage _record = records[version][userAddress];
         uint256 output;
         for(uint256 i = 0;i<ids.length;i++){
             Car memory car = cars[ids[i]];
             carFertility = carFertility.add(car.fertility.mul(amounts[i]));
             carCarry = carCarry.add(car.carry.mul(amounts[i]));
+            
+            _record.disCars[ids[i]] = _record.disCars[ids[i]].add(amounts[i]);
         }
         
         if(carFertility>carCarry){
@@ -321,7 +327,7 @@ contract Mining is Ownable,IERC1155TokenReceiver,MinConf {
         
     
         uint256 miningQuantity = pair.complete.add(carFertility);
-        if(miningQuantity>ORE_AMOUNT){
+        if(miningQuantity>ORE_AMOUNT){ 
             output = ORE_AMOUNT.sub(pair.complete);
         
             _lastStraw(userAddress,pair);
@@ -329,7 +335,7 @@ contract Mining is Ownable,IERC1155TokenReceiver,MinConf {
         }
         
         //history[msg.sender][version] = history[msg.sender][version].add(output);
-        records[version][userAddress].digGross = records[version][userAddress].digGross.add(output);
+        _record.digGross = _record.digGross.add(output);
         pair.complete = pair.complete.add(carFertility);
         pair.actual = pair.actual.add(output);
         updateRanking(userAddress);
@@ -406,6 +412,7 @@ contract Mining is Ownable,IERC1155TokenReceiver,MinConf {
         (uint256 ethAmount,uint256 tokenAmount) = pairSwap.getPairAmount();
         pair.ethAmount = ethAmount;
         pair.tokenAmount = tokenAmount;
+        pair.lastStraw = userAddress;
         records[version][userAddress].lastStraw = true;    
         //syncSort();  
         transferToProject(ethAmount,tokenAmount,pair);
@@ -475,7 +482,18 @@ contract Mining is Ownable,IERC1155TokenReceiver,MinConf {
         digGross = record.digGross;
         lastStraw = record.lastStraw;
         ranking = record.ranking;
+        
+        uint256[] memory carNum = new uint256[](18);
+        for(uint256 i =0;i<18;i++){
+            carIds[i];
+        }
+        
+        //record.disCars[]
     }
+    
+     function getVersionCars(uint256 _version,address userAddress,uint256 _carId) external view returns(uint256){
+         return records[_version][userAddress].disCars[_carId];
+     }
     
      function getPersonalStats(uint8 _version,address userAddress) external view returns (uint256[6] memory stats){
          Record memory record = records[_version][userAddress];

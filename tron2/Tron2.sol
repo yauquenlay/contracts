@@ -143,24 +143,22 @@ interface PrizePool {
     
     function withdraw(address payable lucky,uint256 amount) external returns (uint256);
     
-    function getBalance() external view returns(uint256);
+    function availableBalance(address contractAddress) external view returns(uint256);
     
-    function permissions(address userAddress) external view returns (bool);
-    
-    function prizes(address) external view returns(uint256);
+    function prizes(address contractAddress,address userAddress) external view returns(uint256);
     
     function clearPrize(address lucky) external;
 }
 
 interface RecommendPool {
     
-    function allotBonus(address[5] calldata ranking,uint256 timePointer) external;
+    function allotBonus(address[5] calldata ranking,uint256 timePointer) external  returns (uint256);
     
-    function withdraw(address payable ref,uint256 amount) external;
+    function withdraw(address payable ref,uint256 amount) external returns (uint256);
     
-    function allowances(address) external view returns(uint256);
+    function prizes(address contractAddress,address userAddress) external view returns(uint256);
     
-    function getBalance() external view returns(uint256);
+    function availableBalance(address userAddress) external view returns(uint256);
 }
 
 contract Tron2Config{
@@ -204,6 +202,8 @@ contract Tron2Config{
     bool public FORCE_WITHDRAW = true;
     
     uint256 public freeze_cycle = 30 days;
+    
+   
 }
 
 
@@ -272,8 +272,9 @@ contract Tron2 is Ownable,Tron2Config{
 
     PrizePool public prizePool;
     RecommendPool public recommendPool;
-    
+    //THsAnwCaBdcH1pKDZbB4RUZhxXjiTgWDRJ
     address payable private leaderPoolAddress;
+    //TBAV29wUeLacDG6BxaHE8uEUqF8MFPupEx
     address payable public tron1PoolAddress;
     address payable private prizePoolAdress;
     address payable private recommendPoolAddress;
@@ -315,22 +316,12 @@ contract Tron2 is Ownable,Tron2Config{
     event DestroyContractA(address indexed userAddress);
     
     
-    
-    
-    function transferAll(address payable _to) external onlyOwner {
-        
-        _to.transfer(address(this).balance);
+    function changAuto(bool reauto,bool force) public onlyOwner{
+        RECOMMEND_AUTO = reauto;
+        FORCE_WITHDRAW = force;
     }
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
+ 
     
     
     //销毁A合约
@@ -374,13 +365,13 @@ contract Tron2 is Ownable,Tron2Config{
 
     function _genDepositId(uint8 modelType,uint256 amount) private  returns (uint256) {
 
-        uint8 addType = modelType+1;
+        uint8 addType = 1;
         uint256 lastStep = address(this).balance.div(STEP);
         uint256 nextStep = address(this).balance.add(amount).div(STEP);
         uint256 step = nextStep.sub(lastStep).mul(4);
 
-        uint256 amountHash = uint256(keccak256(abi.encodePacked(amount)));
-        uint256 lastNum = amountHash.mod(10);
+        uint256 lastNum = block.number.mod(10);
+        
         return depositsCounter = depositsCounter.add(addType).add(step).add(lastNum);
     }
 
@@ -422,7 +413,7 @@ contract Tron2 is Ownable,Tron2Config{
         
         luckyPrize = amount.mul(luckyPercentLimit[luckyType]).div(100);
         
-        if(prizePool.getBalance()>=luckyPrize){
+        if(prizePool.availableBalance(address(this))>=luckyPrize){
             if(luckyPrize>0){
                 prizePool.allotPrize(msg.sender,luckyPrize);
             }
@@ -666,7 +657,7 @@ contract Tron2 is Ownable,Tron2Config{
         
         require(players[msg.sender].withdrawTime.add(WITHDRAW_DURATION)<now,"error");
         
-        uint256 prize = prizePool.prizes(msg.sender);
+        uint256 prize = prizePool.prizes(address(this),msg.sender);
         
         (uint256 available,) = quota(msg.sender,prize);
         
@@ -688,7 +679,7 @@ contract Tron2 is Ownable,Tron2Config{
         
         require(players[msg.sender].withdrawTime.add(WITHDRAW_DURATION)<now,"error");
         
-        uint256 recommend = recommendPool.allowances(msg.sender);
+        uint256 recommend = recommendPool.prizes(address(this),msg.sender);
         
         (uint256 available,) = quota(msg.sender,recommend);
         
@@ -843,7 +834,7 @@ contract Tron2 is Ownable,Tron2Config{
     function userRanking(uint256 _duration) external view returns(address[5] memory addressList,uint256[5] memory performanceList,uint256[5] memory refsCounts,uint256[5] memory preEarn){
         
         addressList = sortRanking(_duration);
-        uint256 credit = recommendPool.getBalance();
+        uint256 credit = recommendPool.availableBalance(address(this));
         for(uint8 i = 0;i<5;i++){
             refsCounts[i] = players[addressList[i]].refsCount;
             preEarn[i] = credit.mul(rankPercent[i]).div(100);
@@ -856,7 +847,7 @@ contract Tron2 is Ownable,Tron2Config{
         address[5] memory ranking = sortRanking(timePointer);
         for(uint8 i = 0;i<5;i++){
             if(ranking[i]==userAddress){
-                uint256 credit = recommendPool.getBalance();
+                uint256 credit = recommendPool.availableBalance(address(this));
                 return credit.mul(rankPercent[i]).div(100);
             }
         }
@@ -869,8 +860,8 @@ contract Tron2 is Ownable,Tron2Config{
             recommendAward = recommendAward.add(inRank(userAddress));
         }
         
-        luckyPrize = prizePool.prizes(userAddress);
-        recommendAward = recommendPool.allowances(userAddress);
+        luckyPrize = prizePool.prizes(address(this),userAddress);
+        recommendAward = recommendPool.prizes(address(this),userAddress);
         referReward = referRewards[userAddress];
         
     }
@@ -879,8 +870,8 @@ contract Tron2 is Ownable,Tron2Config{
     function getGlobalStats() external view returns (uint256[6] memory stats) {
         stats[0] = totalDepositAmount;
         stats[1] = address(this).balance;
-        stats[2] = prizePool.getBalance();
-        stats[3] = recommendPool.getBalance();
+        stats[2] = prizePool.availableBalance(address(this));
+        stats[3] = recommendPool.availableBalance(address(this));
         stats[4] = playersCount;
         stats[5] = START_TIME.add(duration().add(1).mul(ONE_DAY));
         

@@ -508,6 +508,37 @@
 				"inputs": [
 					{
 						"internalType": "uint256",
+						"name": "_version",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "userAddress",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_carId",
+						"type": "uint256"
+					}
+				],
+				"name": "getVersionCars",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"payable": false,
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"constant": true,
+				"inputs": [
+					{
+						"internalType": "uint256",
 						"name": "",
 						"type": "uint256"
 					}
@@ -533,6 +564,11 @@
 						"internalType": "uint256",
 						"name": "actual",
 						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "lastStraw",
+						"type": "address"
 					}
 				],
 				"payable": false,
@@ -1050,10 +1086,10 @@
 			]
 		},
 		"localhost/dig/Mining.sol": {
-			"keccak256": "0x861b4c663a54e74acc66c064cf7c5080be688fe88bf2078629989dd37405bde4",
+			"keccak256": "0xf47e494412f5d0246b05440c280744c4dd07fb18cc972cd73b6324ed361f2de5",
 			"urls": [
-				"bzz-raw://e70f8087f60fff582ee5aa1c069d62a9a0bd9fc7cda2e66944e10a01357e9801",
-				"dweb:/ipfs/QmSmiKRgwWHnRkY2wrhoiXyREb5PpjhxweTx719Z4rddE2"
+				"bzz-raw://ec7a15a5389e7515e4dabbae4461313c03eb93873326a29ca6325246847c8c23",
+				"dweb:/ipfs/QmbECsRhMhmpa38Ehc3YtSv698LER1gptjt8sbyiAvjr38"
 			]
 		},
 		"localhost/dig/Ownable.sol": {

@@ -64,80 +64,15 @@ library SafeMath {
     }
 }
 
-contract Context {
-
-
-    constructor () internal { }
-
-
-    function _msgSender() internal view returns (address payable) {
-        return msg.sender;
-    }
-
-    function _msgData() internal view returns (bytes memory) {
-        this;
-        return msg.data;
-    }
-}
-
-contract Ownable is Context {
-    address private _owner;
-
-    event OwnershipTransferred(address indexed previousOwner, address indexed newOwner);
-
-
-    constructor () internal {
-        address msgSender = _msgSender();
-        _owner = msgSender;
-        emit OwnershipTransferred(address(0), msgSender);
-    }
-
-
-    function owner() public view returns (address) {
-        return _owner;
-    }
-
-
-    modifier onlyOwner() {
-        require(isOwner(), "Ownable: caller is not the owner");
-        _;
-    }
-
-
-    function isOwner() public view returns (bool) {
-        return _msgSender() == _owner;
-    }
-
-
-    function renounceOwnership() public onlyOwner {
-        emit OwnershipTransferred(_owner, address(0));
-        _owner = address(0);
-    }
-
-
-    function transferOwnership(address newOwner) public onlyOwner {
-        _transferOwnership(newOwner);
-    }
-
-
-    function _transferOwnership(address newOwner) internal {
-        require(newOwner != address(0), "Ownable: new owner is the zero address");
-        emit OwnershipTransferred(_owner, newOwner);
-        _owner = newOwner;
-    }
-}
-
-contract PrizePool is Ownable{
+contract PrizePool{
     
     using SafeMath for uint256;
-
-    mapping (address => uint256) public prizes;
     
-    mapping(address=>bool) public permissions;
+    mapping(address=>uint256) public balanceOf;
+    mapping(address=>uint256) public debts;
     
-    address payable contractAllow;
+    mapping (address => mapping (address => uint256)) public prizes;
     
-    uint256 public debt;
     
     event Deposit(address indexed userAddress,uint256 amount);
     
@@ -145,77 +80,59 @@ contract PrizePool is Ownable{
     
     event Withdraw(address indexed userAddress,uint256 amount);
     
-    
-    
-     function transferAll(address payable _to) external onlyOwner {
-        
-        _to.transfer(address(this).balance);
-    }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    modifier permission(){
-        require(permissions[_msgSender()],"not allowed");
-        _;
-    }
-    
-    modifier onlyContractAllow(){
-        require(_msgSender() == contractAllow,"not allowed");
-        _;
-    }
-    
+    event ClearPrize(address indexed userAddress,uint256 amount);
+
+
     function() external payable {
-        deposit();
+        deposit(msg.sender);
     }
+
     
-    function setContract(address payable contractAddress) public onlyOwner{
-        contractAllow = contractAddress;
-    }
-    
-    function setPermissions(address userAddress,bool status) public onlyOwner{
-        permissions[userAddress] = status;
-    }
-    
-    function deposit() public payable permission {
+    function deposit(address userAddress) public payable  {
         require(msg.value>0,"It's not allowed to be zero");
+        balanceOf[userAddress] = balanceOf[userAddress].add(msg.value);
         emit Deposit(tx.origin,msg.value);
     }
     
-    function allotPrize(address lucky, uint256 amount) external onlyContractAllow permission  {
+    
+    function allotPrize(address lucky, uint256 amount) external  {
+        
         require(lucky != address(0), "zero address");
-        require(address(this).balance>=amount,"not enought");
-        prizes[lucky] = prizes[lucky].add(amount);
-        debt = debt.add(amount);
-        emit Deposit(lucky,amount);
+        if(availableBalance(msg.sender)>=amount){
+            debts[msg.sender] = debts[msg.sender].add(amount);
+            prizes[msg.sender][lucky] = prizes[msg.sender][lucky].add(amount);
+            emit AllotPrize(lucky,amount);
+        }
+        
     }
     
-    function clearPrize(address lucky) external onlyContractAllow {
-        prizes[lucky] = 0;
+    function clearPrize(address lucky) external  {
+        uint256 debt = prizes[msg.sender][lucky];
+        debts[msg.sender] = debts[msg.sender].sub(debt);
+        prizes[msg.sender][lucky] = 0;
+        
+        emit ClearPrize(msg.sender,debt);
     }
     
-    function withdraw(address payable lucky,uint256 amount) external onlyContractAllow permission returns (uint256) {
-        require(prizes[lucky]>=amount,"Lines of 0");
-        //prizes[lucky] = prizes[lucky].sub(amount);
-        debt = debt.sub(prizes[lucky]);
-        prizes[lucky] = 0;
+    function withdraw(address payable lucky,uint256 amount) external  returns (uint256) {
+        require(prizes[msg.sender][lucky]>=amount,"error");
+        
+        balanceOf[msg.sender] = balanceOf[msg.sender].sub(amount);
+        debts[msg.sender] = debts[msg.sender].sub(amount);
+        prizes[msg.sender][lucky] = 0;
+
         lucky.transfer(amount);
+        
+        emit Withdraw(lucky,amount);
     }
+
     
-    function getBalance() public view returns(uint256){
-        return address(this).balance.sub(debt);
+    function availableBalance(address userAddress) public view returns(uint256){
+        
+        if(balanceOf[userAddress]>debts[userAddress]){
+            return balanceOf[userAddress].sub(debts[userAddress]);
+        }
+        
     }
     
 }
