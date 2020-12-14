@@ -6,74 +6,6 @@
 	"output": {
 		"abi": [
 			{
-				"anonymous": false,
-				"inputs": [
-					{
-						"indexed": true,
-						"internalType": "address",
-						"name": "userAddress",
-						"type": "address"
-					},
-					{
-						"indexed": false,
-						"internalType": "uint256",
-						"name": "timePointer",
-						"type": "uint256"
-					},
-					{
-						"indexed": false,
-						"internalType": "uint256",
-						"name": "bonus",
-						"type": "uint256"
-					}
-				],
-				"name": "AllotBonus",
-				"type": "event"
-			},
-			{
-				"anonymous": false,
-				"inputs": [
-					{
-						"indexed": true,
-						"internalType": "address",
-						"name": "userAddress",
-						"type": "address"
-					},
-					{
-						"indexed": false,
-						"internalType": "uint256",
-						"name": "amount",
-						"type": "uint256"
-					}
-				],
-				"name": "Deposit",
-				"type": "event"
-			},
-			{
-				"anonymous": false,
-				"inputs": [
-					{
-						"indexed": true,
-						"internalType": "address",
-						"name": "userAddress",
-						"type": "address"
-					},
-					{
-						"indexed": false,
-						"internalType": "uint256",
-						"name": "amount",
-						"type": "uint256"
-					}
-				],
-				"name": "Withdraw",
-				"type": "event"
-			},
-			{
-				"payable": true,
-				"stateMutability": "payable",
-				"type": "fallback"
-			},
-			{
 				"constant": false,
 				"inputs": [
 					{
@@ -125,69 +57,12 @@
 				"inputs": [
 					{
 						"internalType": "address",
-						"name": "",
-						"type": "address"
-					}
-				],
-				"name": "balanceOf",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"payable": false,
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"constant": true,
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
-					}
-				],
-				"name": "debts",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"payable": false,
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"constant": false,
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "userAddress",
-						"type": "address"
-					}
-				],
-				"name": "deposit",
-				"outputs": [],
-				"payable": true,
-				"stateMutability": "payable",
-				"type": "function"
-			},
-			{
-				"constant": true,
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "",
+						"name": "contractAddress",
 						"type": "address"
 					},
 					{
 						"internalType": "address",
-						"name": "",
+						"name": "userAddress",
 						"type": "address"
 					}
 				],
@@ -197,53 +72,6 @@
 						"internalType": "uint256",
 						"name": "",
 						"type": "uint256"
-					}
-				],
-				"payable": false,
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"constant": true,
-				"inputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"name": "rankPercent",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"payable": false,
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"constant": true,
-				"inputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					},
-					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
-					}
-				],
-				"name": "settleStatus",
-				"outputs": [
-					{
-						"internalType": "bool",
-						"name": "",
-						"type": "bool"
 					}
 				],
 				"payable": false,
@@ -286,7 +114,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"localhost/tron2/RecommendPool.sol": "RecommendPool"
+			"localhost/tron2/Tron2.sol": "RecommendPool"
 		},
 		"evmVersion": "istanbul",
 		"libraries": {},
@@ -297,11 +125,11 @@
 		"remappings": []
 	},
 	"sources": {
-		"localhost/tron2/RecommendPool.sol": {
-			"keccak256": "0x6c34987d3d59f6a1b37a876a8fc4cd1623a243fa4441d39c16ea47ef14af08f5",
+		"localhost/tron2/Tron2.sol": {
+			"keccak256": "0x07dae4626abcec3373082b7233bd746a6d9d61d9ced6efd68396d6079a5ce9ea",
 			"urls": [
-				"bzz-raw://3eb0a29a62d44e8a6f48515bcad7e1865a1e672c174db98930e47b898c7f94dc",
-				"dweb:/ipfs/QmSJ8ATr9kiS3P9YNDvJrmTmU42gPHYTXSDAR9cBQ3r6vR"
+				"bzz-raw://f37115c9e57862596d420c68504fc776b83aa11b30e1c496b971dff4de94384c",
+				"dweb:/ipfs/QmTy8V9mLqFke22ZEBKbPRcEX6eMwXMg5goeTYxz9aPDck"
 			]
 		}
 	},

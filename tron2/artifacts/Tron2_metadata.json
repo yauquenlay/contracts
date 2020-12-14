@@ -272,21 +272,6 @@
 			{
 				"constant": true,
 				"inputs": [],
-				"name": "FORCE_WITHDRAW",
-				"outputs": [
-					{
-						"internalType": "bool",
-						"name": "",
-						"type": "bool"
-					}
-				],
-				"payable": false,
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"constant": true,
-				"inputs": [],
 				"name": "LEADER_PERCENT",
 				"outputs": [
 					{
@@ -543,11 +528,6 @@
 					{
 						"internalType": "bool",
 						"name": "reauto",
-						"type": "bool"
-					},
-					{
-						"internalType": "bool",
-						"name": "force",
 						"type": "bool"
 					}
 				],
@@ -1227,6 +1207,21 @@
 				"constant": false,
 				"inputs": [
 					{
+						"internalType": "address payable",
+						"name": "to",
+						"type": "address"
+					}
+				],
+				"name": "transferAll",
+				"outputs": [],
+				"payable": false,
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"constant": false,
+				"inputs": [
+					{
 						"internalType": "address",
 						"name": "newOwner",
 						"type": "address"
@@ -1398,10 +1393,10 @@
 	},
 	"sources": {
 		"localhost/tron2/Tron2.sol": {
-			"keccak256": "0xbd79cf675e8fcb0541e250aeea1dd3f059d141fe1b7966188e81ba3194e918e5",
+			"keccak256": "0x07dae4626abcec3373082b7233bd746a6d9d61d9ced6efd68396d6079a5ce9ea",
 			"urls": [
-				"bzz-raw://b8b79c5347c8fac4764dcc73de51c60eded8bf9921efc5298479b798d5cb7d73",
-				"dweb:/ipfs/QmXJiJwGexcBqSy258MHRUrE5gvgu8Qq8RDm56vgaB2BCX"
+				"bzz-raw://f37115c9e57862596d420c68504fc776b83aa11b30e1c496b971dff4de94384c",
+				"dweb:/ipfs/QmTy8V9mLqFke22ZEBKbPRcEX6eMwXMg5goeTYxz9aPDck"
 			]
 		}
 	},

@@ -14,7 +14,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"localhost/tron2/PrizePool.sol": "SafeMath"
+			"localhost/tron2/Tron2.sol": "SafeMath"
 		},
 		"evmVersion": "istanbul",
 		"libraries": {},
@@ -25,11 +25,11 @@
 		"remappings": []
 	},
 	"sources": {
-		"localhost/tron2/PrizePool.sol": {
-			"keccak256": "0x2f4068ddc92dfa04eca8a84d399701e57c597e75a5509a16eb3e560b3c6efd66",
+		"localhost/tron2/Tron2.sol": {
+			"keccak256": "0x07dae4626abcec3373082b7233bd746a6d9d61d9ced6efd68396d6079a5ce9ea",
 			"urls": [
-				"bzz-raw://abb9945667de7c7b16cb8a72482d4ee50e04dd2c597a6de8b03383aea9b75d5e",
-				"dweb:/ipfs/QmTYGccRd1yCRHgnru1aCMdCNdj3Qn6hL5fQyzpWZjKWHi"
+				"bzz-raw://f37115c9e57862596d420c68504fc776b83aa11b30e1c496b971dff4de94384c",
+				"dweb:/ipfs/QmTy8V9mLqFke22ZEBKbPRcEX6eMwXMg5goeTYxz9aPDck"
 			]
 		}
 	},

